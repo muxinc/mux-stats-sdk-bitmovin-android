@@ -2,16 +2,21 @@ package com.mux.stats.sdk.muxstats.bitmovinplayer.demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Point;
 import android.os.Bundle;
 
 import com.bitmovin.player.BitmovinPlayer;
 import com.bitmovin.player.BitmovinPlayerView;
 import com.bitmovin.player.config.media.SourceConfiguration;
+import com.mux.stats.sdk.core.model.CustomerPlayerData;
+import com.mux.stats.sdk.core.model.CustomerVideoData;
+import com.mux.stats.sdk.muxstats.bitmovinplayer.MuxStatsSDKBitmovinPlayer;
 
 public class MainActivity extends AppCompatActivity {
 
     private BitmovinPlayerView bitmovinPlayerView;
     private BitmovinPlayer bitmovinPlayer;
+    private MuxStatsSDKBitmovinPlayer muxStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -23,6 +28,24 @@ public class MainActivity extends AppCompatActivity {
         this.bitmovinPlayer = this.bitmovinPlayerView.getPlayer();
 
         this.initializePlayer();
+        configureMuxSdk();
+    }
+
+    private void configureMuxSdk() {
+        CustomerPlayerData customerPlayerData = new CustomerPlayerData();
+        customerPlayerData.setEnvironmentKey("YOUR ENVIRONMENT KEY HERE");
+        CustomerVideoData customerVideoData = new CustomerVideoData();
+        customerVideoData.setVideoTitle("Sintel");
+        muxStats = new MuxStatsSDKBitmovinPlayer(
+                this,
+                bitmovinPlayerView,
+                "demo-view-player",
+                customerPlayerData,
+                customerVideoData);
+
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        muxStats.setScreenSize(size.x, size.y);
     }
 
     @Override
