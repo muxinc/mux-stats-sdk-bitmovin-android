@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mux.stats.sdk.muxstats.bitmovinplayer.demo">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,6 +21,10 @@
 
         <meta-data
             android:name="BITMOVIN_PLAYER_LICENSE_KEY"
-            android:value="--Your-Key--"/>
+            android:value="46d8529b-2d9d-4973-9f0a-c125398197ea"/>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true"/>
     </application>
 </manifest>
