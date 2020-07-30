@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureMuxSdk() {
         CustomerPlayerData customerPlayerData = new CustomerPlayerData();
-        customerPlayerData.setEnvironmentKey("eo12j5272jd1vpcb8ntfmk9kb");
+        customerPlayerData.setEnvironmentKey("YOUR ENV KEY HERE");
         CustomerVideoData customerVideoData = new CustomerVideoData();
         customerVideoData.setVideoTitle("Sintel");
         muxStats = new MuxStatsSDKBitmovinPlayer(
