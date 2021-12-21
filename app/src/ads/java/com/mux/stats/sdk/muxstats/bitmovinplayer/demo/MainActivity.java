@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
         muxStats.setScreenSize(size.x, size.y);
+        muxStats.enableMuxCoreDebug(true, false);
     }
 
     void initAdTypeList() {
@@ -172,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     void setupVMAPAd(String adTagUri) {
         SourceConfiguration sourceConfiguration = new SourceConfiguration();
         sourceConfiguration.addSourceItem("https://bitdash-a.akamaihd.net/content/sintel/sintel.mpd");
+<<<<<<< HEAD
         PlayerConfiguration playerConfiguration = new PlayerConfiguration();
         playerConfiguration.setSourceConfiguration(sourceConfiguration);
 

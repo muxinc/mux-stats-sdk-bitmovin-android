@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         this.bitmovinPlayerView = (BitmovinPlayerView) this.findViewById(R.id.bitmovinPlayerView);
         this.bitmovinPlayer = this.bitmovinPlayerView.getPlayer();
 
-        this.initializePlayer();
         configureMuxSdk();
+        this.initializePlayer();
     }
 
     private void configureMuxSdk() {
         CustomerPlayerData customerPlayerData = new CustomerPlayerData();
-        customerPlayerData.setEnvironmentKey("YOUR ENVIRONMENT KEY HERE");
+        customerPlayerData.setEnvironmentKey("YOUR ENV KEY HERE");
         CustomerVideoData customerVideoData = new CustomerVideoData();
         customerVideoData.setVideoTitle("Sintel");
         muxStats = new MuxStatsSDKBitmovinPlayer(
@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
         muxStats.setScreenSize(size.x, size.y);
+        muxStats.enableMuxCoreDebug(true, false);
     }
 
     @Override
