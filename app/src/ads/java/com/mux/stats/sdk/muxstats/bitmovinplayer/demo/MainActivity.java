@@ -8,14 +8,9 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.widget.ListView;
 
-import com.bitmovin.player.BitmovinPlayer;
-import com.bitmovin.player.BitmovinPlayerView;
-import com.bitmovin.player.config.PlayerConfiguration;
-import com.bitmovin.player.config.advertising.AdItem;
-import com.bitmovin.player.config.advertising.AdSource;
-import com.bitmovin.player.config.advertising.AdSourceType;
-import com.bitmovin.player.config.advertising.AdvertisingConfiguration;
-import com.bitmovin.player.config.media.SourceConfiguration;
+import com.bitmovin.player.PlayerView;
+import com.bitmovin.player.api.Player;
+import com.bitmovin.player.api.source.SourceConfig;
 import com.mux.stats.sdk.core.MuxSDKViewOrientation;
 import com.mux.stats.sdk.core.model.CustomerPlayerData;
 import com.mux.stats.sdk.core.model.CustomerVideoData;
@@ -27,8 +22,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BitmovinPlayerView bitmovinPlayerView;
-    private BitmovinPlayer bitmovinPlayer;
+    private PlayerView playerView;
+    private Player player;
     private MuxStatsSDKBitmovinPlayer muxStats;
 
     private ListView adTypeList;
@@ -40,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bitmovinPlayerView = findViewById(R.id.bitmovinPlayerView);
+        playerView = findViewById(R.id.bitmovinPlayerView);
         adTypeList = findViewById(R.id.ad_type_selection);
 
-        bitmovinPlayer = bitmovinPlayerView.getPlayer();
+        player = Player.create(this);
+        playerView.setPlayer(player);
+        // load source using a source config
+        player.load(SourceConfig.fromUrl("https://bitdash-a.akamaihd.net/content/sintel/sintel.mpd"));
 
         configureMuxSdk();
         initAdTypeList();
@@ -67,35 +65,35 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart()
     {
-        this.bitmovinPlayerView.onStart();
+        this.playerView.onStart();
         super.onStart();
     }
 
     @Override
     protected void onResume()
     {
+        this.playerView.onResume();
         super.onResume();
-        this.bitmovinPlayerView.onResume();
     }
 
     @Override
     protected void onPause()
     {
-        this.bitmovinPlayerView.onPause();
+        this.playerView.onPause();
         super.onPause();
     }
 
     @Override
     protected void onStop()
     {
-        this.bitmovinPlayerView.onStop();
+        this.playerView.onStop();
         super.onStop();
     }
 
     @Override
     protected void onDestroy()
     {
-        this.bitmovinPlayerView.onDestroy();
+        this.playerView.onDestroy();
         super.onDestroy();
     }
 
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         customerVideoData.setVideoTitle("Sintel");
         muxStats = new MuxStatsSDKBitmovinPlayer(
                 this,
-                bitmovinPlayerView,
+            playerView,
                 "demo-view-player",
                 customerPlayerData,
                 customerVideoData);
@@ -150,13 +148,13 @@ public class MainActivity extends AppCompatActivity {
 
             adTypeList.setOnItemClickListener((parent, view, position, id) -> {
                 // Reset player playback
-                bitmovinPlayer.pause();
-                AdSample selectedAd = (AdSample) adTypeList.getAdapter().getItem(position);
-                if (selectedAd.getName().startsWith("VMAP")) {
-                    setupVMAPAd(selectedAd.getAdTagUri());
-                } else {
-                    setupVASTAd(selectedAd.getAdTagUri());
-                }
+//                bitmovinPlayer.pause();
+//                AdSample selectedAd = (AdSample) adTypeList.getAdapter().getItem(position);
+//                if (selectedAd.getName().startsWith("VMAP")) {
+//                    setupVMAPAd(selectedAd.getAdTagUri());
+//                } else {
+//                    setupVASTAd(selectedAd.getAdTagUri());
+//                }
             });
             adTypeList.performItemClick(
                     adTypeList.findViewWithTag(
@@ -168,37 +166,5 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    void setupVMAPAd(String adTagUri) {
-        SourceConfiguration sourceConfiguration = new SourceConfiguration();
-        sourceConfiguration.addSourceItem("https://bitdash-a.akamaihd.net/content/sintel/sintel.mpd");
-<<<<<<< HEAD
-        PlayerConfiguration playerConfiguration = new PlayerConfiguration();
-        playerConfiguration.setSourceConfiguration(sourceConfiguration);
-
-        AdSource firstAdSource = new AdSource(AdSourceType.IMA, adTagUri);
-        AdItem adItem = new AdItem("0%", firstAdSource);
-        AdvertisingConfiguration advertisingConfiguration = new AdvertisingConfiguration(adItem);
-
-        playerConfiguration.setAdvertisingConfiguration(advertisingConfiguration);
-        // load source using the created source configuration
-        bitmovinPlayer.setup(playerConfiguration);
-    }
-
-    void setupVASTAd(String adTagUri) {
-        PlayerConfiguration playerConfiguration = new PlayerConfiguration();
-
-        SourceConfiguration sourceConfiguration = new SourceConfiguration();
-        sourceConfiguration.addSourceItem("https://bitdash-a.akamaihd.net/content/sintel/sintel.mpd");
-
-        AdSource firstAdSource = new AdSource(AdSourceType.IMA, adTagUri);
-        AdItem adItem = new AdItem("pre", firstAdSource);
-        AdvertisingConfiguration advertisingConfiguration = new AdvertisingConfiguration(adItem);
-
-        playerConfiguration.setSourceConfiguration(sourceConfiguration);
-        playerConfiguration.setAdvertisingConfiguration(advertisingConfiguration);
-        // load source using the created source configuration
-        bitmovinPlayer.setup(playerConfiguration);
     }
 }

@@ -3,53 +3,17 @@ package com.mux.stats.sdk.muxstats.bitmovinplayer;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnVideoSizeChangedListener;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.SeekBar;
-
-import com.bitmovin.player.BitmovinPlayer;
-import com.bitmovin.player.BitmovinPlayerView;
-import com.bitmovin.player.api.event.data.AdBreakStartedEvent;
-import com.bitmovin.player.api.event.data.BitmovinPlayerEvent;
-import com.bitmovin.player.api.event.data.ErrorEvent;
-import com.bitmovin.player.api.event.data.MetadataEvent;
-import com.bitmovin.player.api.event.data.PausedEvent;
-import com.bitmovin.player.api.event.data.SeekEvent;
-import com.bitmovin.player.api.event.data.SourceLoadedEvent;
-import com.bitmovin.player.api.event.data.StallEndedEvent;
-import com.bitmovin.player.api.event.data.StallStartedEvent;
-import com.bitmovin.player.api.event.data.TimeChangedEvent;
-import com.bitmovin.player.api.event.data.VideoPlaybackQualityChangedEvent;
-import com.bitmovin.player.api.event.data.VideoSizeChangedEvent;
-import com.bitmovin.player.api.event.listener.OnAdBreakFinishedListener;
-import com.bitmovin.player.api.event.listener.OnAdBreakStartedListener;
-import com.bitmovin.player.api.event.listener.OnAdErrorListener;
-import com.bitmovin.player.api.event.listener.OnAdFinishedListener;
-import com.bitmovin.player.api.event.listener.OnAdStartedListener;
-import com.bitmovin.player.api.event.listener.OnConfigurationUpdatedListener;
-import com.bitmovin.player.api.event.listener.OnDownloadFinishedListener;
-import com.bitmovin.player.api.event.listener.OnErrorListener;
-import com.bitmovin.player.api.event.listener.OnMetadataListener;
-import com.bitmovin.player.api.event.listener.OnPausedListener;
-import com.bitmovin.player.api.event.listener.OnPlayListener;
-import com.bitmovin.player.api.event.listener.OnPlaybackFinishedListener;
-import com.bitmovin.player.api.event.listener.OnPlayingListener;
-import com.bitmovin.player.api.event.listener.OnSeekListener;
-import com.bitmovin.player.api.event.listener.OnSeekedListener;
-import com.bitmovin.player.api.event.listener.OnSourceLoadedListener;
-import com.bitmovin.player.api.event.listener.OnStallEndedListener;
-import com.bitmovin.player.api.event.listener.OnStallStartedListener;
-import com.bitmovin.player.api.event.listener.OnTimeChangedListener;
-import com.bitmovin.player.api.event.listener.OnVideoPlaybackQualityChangedListener;
-import com.bitmovin.player.api.event.listener.OnVideoSizeChangedListener;
-import com.bitmovin.player.config.Configuration;
-import com.bitmovin.player.config.media.DASHSource;
-import com.bitmovin.player.config.media.SourceItem;
-import com.bitmovin.player.config.quality.VideoQuality;
-import com.bitmovin.player.model.Metadata;
+import android.widget.TimePicker.OnTimeChangedListener;
+import androidx.annotation.Nullable;
+import com.bitmovin.player.api.event.EventListener;
+import com.bitmovin.player.api.event.PlayerEvent;
+import com.bitmovin.player.api.event.SourceEvent;
+import com.bitmovin.player.api.metadata.Metadata;
 import com.mux.stats.sdk.core.MuxSDKViewOrientation;
 import com.mux.stats.sdk.core.events.EventBus;
 import com.mux.stats.sdk.core.events.IEvent;
@@ -78,6 +42,16 @@ import com.mux.stats.sdk.muxstats.IPlayerListener;
 import com.mux.stats.sdk.muxstats.MuxErrorException;
 import com.mux.stats.sdk.muxstats.MuxStats;
 import java.lang.ref.WeakReference;
+import com.bitmovin.player.PlayerView;
+import com.bitmovin.player.api.Player;
+import com.bitmovin.player.api.PlayerConfig;
+import com.bitmovin.player.api.advertising.AdItem;
+import com.bitmovin.player.api.advertising.AdSource;
+import com.bitmovin.player.api.advertising.AdSourceType;
+import com.bitmovin.player.api.advertising.AdvertisingConfig;
+import com.bitmovin.player.api.source.SourceConfig;
+
+import java.util.List;
 
 import static android.os.SystemClock.elapsedRealtime;
 import static com.mux.stats.sdk.muxstats.bitmovinplayer.Util.secondsToMs;
@@ -86,7 +60,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     public static final String TAG = "MuxStatsSDKTHEOplayer";
 
     protected MuxStats muxStats;
-    protected WeakReference<BitmovinPlayerView> player;
+    protected WeakReference<PlayerView> player;
     protected WeakReference<Context> contextRef;
 
     protected static final int ERROR_UNKNOWN = -1;
@@ -103,12 +77,11 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     protected boolean inAdPlayback;
 
     protected double playbackPosition;
-
     public int streamType = -1;
 
 
-    public MuxStatsSDKBitmovinPlayer(Context ctx, final BitmovinPlayerView player, String playerName,
-                                     CustomerPlayerData customerPlayerData, CustomerVideoData customerVideoData) {
+    public MuxStatsSDKBitmovinPlayer(Context ctx, final PlayerView player, String playerName,
+        CustomerPlayerData customerPlayerData, CustomerVideoData customerVideoData) {
         super();
         this.player = new WeakReference<>(player);
         this.contextRef = new WeakReference<>(ctx);
@@ -126,84 +99,101 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             dispatch(new TimeUpdateEvent(null));
         }
 
-        // Handle rendition change event
-        player.getPlayer().addEventListener((OnVideoPlaybackQualityChangedListener) videoPlaybackQualityChangedEvent -> {
-            VideoQuality newQuality = videoPlaybackQualityChangedEvent.getNewVideoQuality();
-            if (newQuality.getFrameRate() > 0) {
-                sourceAdvertisedFramerate = newQuality.getFrameRate();
-            }
-            sourceWidth = newQuality.getWidth();
-            sourceHeight = newQuality.getHeight();
-            RenditionChangeEvent event = new RenditionChangeEvent(null);
-            dispatch(event);
-        });
-
-        player.getPlayer().addEventListener((OnVideoSizeChangedListener) videoSizeChangedEvent -> {
-            sourceWidth = videoSizeChangedEvent.getWidth();
-            sourceHeight = videoSizeChangedEvent.getHeight();
-            dispatch(new VideoChangeEvent(null));
-        });
-
-        player.getPlayer().addEventListener((OnTimeChangedListener) timeChangedEvent -> {
-            playbackPosition = timeChangedEvent.getTime();
-        });
-
-        player.getPlayer().addEventListener((OnPlayListener) playEvent -> {
-            dispatch(new PlayEvent(null));
-        });
-
-        player.getPlayer().addEventListener((OnPlayingListener) playingEvent -> {
-            dispatch(new PlayingEvent(null));
-        });
-
-        player.getPlayer().addEventListener((OnPausedListener) pausedEvent -> {
-            dispatch(new PauseEvent(null));
-        });
-
-        player.getPlayer().addEventListener((OnPlaybackFinishedListener) finishedEvent -> {
-            dispatch(new EndedEvent(null));
-        });
-
-        player.getPlayer().addEventListener((OnSeekListener) seekEvent -> dispatch(new SeekingEvent(null)));
-
-        player.getPlayer().addEventListener((OnSeekedListener) seekedEvent -> dispatch(new SeekedEvent(null)));
-
-        player.getPlayer().addEventListener((OnErrorListener) errorEvent -> internalError(new MuxErrorException(0, errorEvent.getMessage())));
-
-        player.getPlayer().addEventListener((OnMetadataListener) metadataEvent -> {
-            Metadata metadata = metadataEvent.getMetadata();
-            Log.i(TAG, "Type: " + metadataEvent.getType());
-            for (int i = 0; i < metadata.length(); i++){
-                Log.i(TAG, "    Entry: " + metadata.get(i).getType());
-            }
-        });
-
-        player.getPlayer().addEventListener((OnSourceLoadedListener) event -> {
-            SourceItem sItem = event.getSourceItem();
-            mimeType = sItem.getType().name();
-            String videoUrl = "";
-            if (sItem.getDashSource() != null) {
-                videoUrl = sItem.getDashSource().getUrl();
-            }
-            if (sItem.getHlsSource() != null) {
-                videoUrl = sItem.getHlsSource().getUrl();
-            }
-            if (this.player != null && this.player.get() != null && videoUrl.length() > 0) { ;
-                CustomerVideoData videoData = muxStats.getCustomerVideoData();
-                videoData.setVideoSourceUrl(videoUrl);
-                if (sItem.getTitle() != null) {
-                    videoData.setVideoTitle(sItem.getTitle());
-                }
-                muxStats.updateCustomerData(null, videoData);
-            }
-        });
-
-        player.getPlayer().addEventListener((OnStallStartedListener) stallStartedEvent -> isBuffering = true);
-
-        player.getPlayer().addEventListener((OnStallEndedListener) stallEndedEvent -> isBuffering = false);
+        player.getPlayer().on(PlayerEvent.Error.class, onPlayerErrorListener);
+        // Handle rendition change
+        player.getPlayer().on(PlayerEvent.VideoSizeChanged.class, onVideoSizeChangeListener);
+        player.getPlayer().on(PlayerEvent.TimeChanged.class, onTimeChangeListener);
+        player.getPlayer().on(PlayerEvent.Play.class, onPlayListener);
+        player.getPlayer().on(PlayerEvent.Playing.class, onPlayingListener);
+        player.getPlayer().on(PlayerEvent.Paused.class, onPausedListener);
+        player.getPlayer().on(PlayerEvent.PlaybackFinished.class, onPlaybackFinishedListener);
+        player.getPlayer().on(PlayerEvent.Seek.class, onSeekListener);
+        player.getPlayer().on(PlayerEvent.Seeked.class, onSeekedListener);
+        player.getPlayer().on(PlayerEvent.Metadata.class, onMetadataListener);
+        player.getPlayer().on(PlayerEvent.StallStarted.class, onStallStartedListener);
+        player.getPlayer().on(PlayerEvent.StallEnded.class, onStallEndedListener);
 
         // Ads event listeners
-        player.getPlayer().addEventListener((OnAdBreakStartedListener) adBreakStartedEvent -> {
+        player.getPlayer().on(PlayerEvent.AdBreakStarted.class, onAdBreakStartedListener);
+        player.getPlayer().on(PlayerEvent.AdStarted.class, onAdStartedListener);
+        player.getPlayer().on(PlayerEvent.AdFinished.class, onAdFinishedListener);
+        player.getPlayer().on(PlayerEvent.AdBreakFinished.class, onAdBreakFinishedListener);
+        player.getPlayer().on(PlayerEvent.AdError.class, onAdErrorListener);
+
+        player.getPlayer().on(SourceEvent.Loaded.class, onSourceLoadedListener);
+    }
+
+    private final EventListener<PlayerEvent.Error> onPlayerErrorListener = errorEvent -> {
+        internalError(new MuxErrorException(0, errorEvent.getMessage()));
+    };
+
+    private final EventListener<PlayerEvent.VideoSizeChanged> onVideoSizeChangeListener =
+        videoChangeEvent -> {
+            //TODO see how to get framerate
+//            VideoQuality newQuality = videoPlaybackQualityChangedEvent.getNewVideoQuality();
+//            if (newQuality.getFrameRate() > 0) {
+//                sourceAdvertisedFramerate = newQuality.getFrameRate();
+//            }
+            sourceWidth = videoChangeEvent.getWidth();
+            sourceHeight = videoChangeEvent.getHeight();
+            RenditionChangeEvent event = new RenditionChangeEvent(null);
+            dispatch(event);
+        };
+
+    private final EventListener<PlayerEvent.TimeChanged> onTimeChangeListener =
+        timeChangeEvent -> {
+            playbackPosition = timeChangeEvent.getTime();
+        };
+
+    private final EventListener<PlayerEvent.Play> onPlayListener =
+        playEvent -> {
+            dispatch(new PlayEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.Playing> onPlayingListener =
+        playingEvent -> {
+            dispatch(new PlayingEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.Paused> onPausedListener =
+        pausedEvent -> {
+            dispatch(new PauseEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.PlaybackFinished> onPlaybackFinishedListener =
+        playbackFinishedEvent -> {
+            dispatch(new EndedEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.Seek> onSeekListener =
+        seekingEvent -> {
+            dispatch(new SeekingEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.Seeked> onSeekedListener =
+        seekedEvent -> {
+            dispatch(new SeekedEvent(null));
+        };
+
+    private final EventListener<PlayerEvent.Metadata> onMetadataListener =
+        metadataEvent -> {
+            // Do nothing
+        };
+
+    private final EventListener<PlayerEvent.StallStarted> onStallStartedListener =
+        stallStartedEvent -> {
+            // Buffering started
+            isBuffering = true;
+        };
+
+    private final EventListener<PlayerEvent.StallEnded> onStallEndedListener =
+        stallEndedEvent -> {
+            // Buffering ended
+            isBuffering = false;
+        };
+
+    private final EventListener<PlayerEvent.AdBreakStarted> onAdBreakStartedListener =
+        adBreakStartedEvent -> {
             inAdBreak = true;
             // Record that we're in an ad break so we can supress standard play/playing/pause events
             AdBreakStartEvent adBreakEvent = new AdBreakStartEvent(null);
@@ -215,20 +205,23 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             viewData.setViewPrerollCreativeId(adCreativeId);
             adBreakEvent.setViewData(viewData);
             dispatch(adBreakEvent);
-        });
+        };
 
-        player.getPlayer().addEventListener((OnAdStartedListener) adStartedEvent -> {
+    private final EventListener<PlayerEvent.AdStarted> onAdStartedListener =
+        adStartedEvent -> {
             inAdPlayback = true;
             dispatch(new AdPlayEvent(null));
             dispatch(new AdPlayingEvent(null));
-        });
+        };
 
-        player.getPlayer().addEventListener((OnAdFinishedListener) adFinishedEvent -> {
+    private final EventListener<PlayerEvent.AdFinished> onAdFinishedListener =
+        stallEndedEvent -> {
             inAdPlayback = false;
             dispatch(new AdEndedEvent(null));
-        });
+        };
 
-        player.getPlayer().addEventListener((OnAdBreakFinishedListener) adBreakFinishedEvent -> {
+    private final EventListener<PlayerEvent.AdBreakFinished> onAdBreakFinishedListener =
+        stallEndedEvent -> {
             inAdBreak = false;
             // Reset all of our state correctly for getting out of ads
             dispatch(new AdBreakEndEvent(null));
@@ -236,15 +229,23 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             if (getCurrentPosition() == 0) {
                 dispatch(new PlayEvent(null));
             }
-        });
+        };
 
-        player.getPlayer().addEventListener((OnAdErrorListener) adErrorEvent -> {
+    private final EventListener<PlayerEvent.AdError> onAdErrorListener =
+        stallEndedEvent -> {
             dispatch(new AdErrorEvent(null));
-        });
-    }
+        };
+
+    private final EventListener<SourceEvent.Loaded> onSourceLoadedListener =
+        sourceLoadedEvent -> {
+            mimeType = sourceLoadedEvent.getSource().getConfig().getType().name();
+            CustomerVideoData videoData = muxStats.getCustomerVideoData();
+            videoData.setVideoSourceUrl(sourceLoadedEvent.getSource().getConfig().getUrl());
+            muxStats.updateCustomerData(null, videoData);
+        };
+
 
     // IPlayerListener
-
     @Override
     public long getCurrentPosition() {
         return secondsToMs(playbackPosition);
@@ -356,7 +357,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         muxStats.orientationChange(orientation);
     }
 
-    public void setPlayerView(BitmovinPlayerView playerView) {
+    public void setPlayerView(PlayerView playerView) {
         this.player = new WeakReference<>(playerView);
     }
 
@@ -402,7 +403,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
         MuxDevice(Context ctx, String version) {
             deviceId = Settings.Secure.getString(ctx.getContentResolver(),
-                    Settings.Secure.ANDROID_ID);
+                Settings.Secure.ANDROID_ID);
             this.version = version;
             try {
                 PackageInfo pi = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
