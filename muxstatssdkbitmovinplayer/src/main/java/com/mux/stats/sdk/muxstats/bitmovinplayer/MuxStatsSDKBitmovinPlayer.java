@@ -3,17 +3,13 @@ package com.mux.stats.sdk.muxstats.bitmovinplayer;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.media.MediaPlayer.OnVideoSizeChangedListener;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.TimePicker.OnTimeChangedListener;
-import androidx.annotation.Nullable;
 import com.bitmovin.player.api.event.EventListener;
 import com.bitmovin.player.api.event.PlayerEvent;
 import com.bitmovin.player.api.event.SourceEvent;
-import com.bitmovin.player.api.metadata.Metadata;
 import com.mux.stats.sdk.core.MuxSDKViewOrientation;
 import com.mux.stats.sdk.core.events.EventBus;
 import com.mux.stats.sdk.core.events.IEvent;
@@ -32,27 +28,19 @@ import com.mux.stats.sdk.core.events.playback.RenditionChangeEvent;
 import com.mux.stats.sdk.core.events.playback.SeekedEvent;
 import com.mux.stats.sdk.core.events.playback.SeekingEvent;
 import com.mux.stats.sdk.core.events.playback.TimeUpdateEvent;
-import com.mux.stats.sdk.core.events.playback.VideoChangeEvent;
+import com.mux.stats.sdk.core.model.CustomerData;
 import com.mux.stats.sdk.core.model.CustomerPlayerData;
 import com.mux.stats.sdk.core.model.CustomerVideoData;
 import com.mux.stats.sdk.core.model.ViewData;
 import com.mux.stats.sdk.core.util.MuxLogger;
 import com.mux.stats.sdk.muxstats.IDevice;
+import com.mux.stats.sdk.muxstats.INetworkRequest;
 import com.mux.stats.sdk.muxstats.IPlayerListener;
+import com.mux.stats.sdk.muxstats.LogPriority;
 import com.mux.stats.sdk.muxstats.MuxErrorException;
 import com.mux.stats.sdk.muxstats.MuxStats;
 import java.lang.ref.WeakReference;
 import com.bitmovin.player.PlayerView;
-import com.bitmovin.player.api.Player;
-import com.bitmovin.player.api.PlayerConfig;
-import com.bitmovin.player.api.advertising.AdItem;
-import com.bitmovin.player.api.advertising.AdSource;
-import com.bitmovin.player.api.advertising.AdSourceType;
-import com.bitmovin.player.api.advertising.AdvertisingConfig;
-import com.bitmovin.player.api.source.SourceConfig;
-
-import java.util.List;
-
 import static android.os.SystemClock.elapsedRealtime;
 import static com.mux.stats.sdk.muxstats.bitmovinplayer.Util.secondsToMs;
 
@@ -80,15 +68,21 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     public int streamType = -1;
 
 
-    public MuxStatsSDKBitmovinPlayer(Context ctx, final PlayerView player, String playerName,
-        CustomerPlayerData customerPlayerData, CustomerVideoData customerVideoData) {
+    public MuxStatsSDKBitmovinPlayer(
+        Context ctx,
+        PlayerView player,
+        String playerName,
+        CustomerData customerData,
+        boolean sentryEnabled,
+        INetworkRequest networkRequest
+    ) {
         super();
         this.player = new WeakReference<>(player);
         this.contextRef = new WeakReference<>(ctx);
         // TODO Replace this with a dynamic way to get a player version
         MuxStats.setHostDevice(new MuxDevice(ctx, "2.42.0"));
-        MuxStats.setHostNetworkApi(new MuxNetworkRequests());
-        muxStats = new MuxStats(this, playerName, customerPlayerData, customerVideoData);
+        MuxStats.setHostNetworkApi(networkRequest);
+        muxStats = new MuxStats(this, playerName, customerData);
         addListener(muxStats);
 
 
@@ -121,6 +115,11 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         player.getPlayer().on(PlayerEvent.AdError.class, onAdErrorListener);
 
         player.getPlayer().on(SourceEvent.Loaded.class, onSourceLoadedListener);
+    }
+
+    public MuxStatsSDKBitmovinPlayer(Context ctx, final PlayerView player, String playerName,
+        CustomerData customerData) {
+        this(ctx, player, playerName, customerData, false, new MuxNetworkRequests());
     }
 
     private final EventListener<PlayerEvent.Error> onPlayerErrorListener = errorEvent -> {
@@ -324,6 +323,37 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         return 0;
     }
 
+    // Latency metrics
+    @Override
+    public Long getPlayerProgramTime() {
+        return null;
+    }
+
+    @Override
+    public Long getPlayerManifestNewestTime() {
+        return null;
+    }
+
+    @Override
+    public Long getVideoHoldback() {
+        return null;
+    }
+
+    @Override
+    public Long getVideoPartHoldback() {
+        return null;
+    }
+
+    @Override
+    public Long getVideoPartTargetDuration() {
+        return null;
+    }
+
+    @Override
+    public Long getVideoTargetDuration() {
+        return null;
+    }
+
     // EventBus
 
     @Override
@@ -473,8 +503,18 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         public String getPlayerSoftware() { return PLAYER_SOFTWARE; }
 
         @Override
+        public String getNetworkConnectionType() {
+            return null;
+        }
+
+        @Override
         public long getElapsedRealtime() {
             return elapsedRealtime();
+        }
+
+        @Override
+        public void outputLog(LogPriority logPriority, String s, String s1) {
+
         }
 
         @Override

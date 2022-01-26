@@ -1,3 +1,4 @@
 rootProject.name='Mux Stats SDK Bitmovinplayer'
 include ':app'
 include ':muxstatssdkbitmovinplayer'
+include ':automatedtests'

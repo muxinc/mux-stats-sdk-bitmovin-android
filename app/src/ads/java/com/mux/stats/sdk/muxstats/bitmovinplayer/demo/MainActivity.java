@@ -12,6 +12,7 @@ import com.bitmovin.player.PlayerView;
 import com.bitmovin.player.api.Player;
 import com.bitmovin.player.api.source.SourceConfig;
 import com.mux.stats.sdk.core.MuxSDKViewOrientation;
+import com.mux.stats.sdk.core.model.CustomerData;
 import com.mux.stats.sdk.core.model.CustomerPlayerData;
 import com.mux.stats.sdk.core.model.CustomerVideoData;
 import com.mux.stats.sdk.muxstats.bitmovinplayer.MuxStatsSDKBitmovinPlayer;
@@ -99,15 +100,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureMuxSdk() {
         CustomerPlayerData customerPlayerData = new CustomerPlayerData();
-        customerPlayerData.setEnvironmentKey("eo12j5272jd1vpcb8ntfmk9kb");
+        customerPlayerData.setEnvironmentKey("YOUR_KEY_HERE");
         CustomerVideoData customerVideoData = new CustomerVideoData();
         customerVideoData.setVideoTitle("Sintel");
+        CustomerData customerData = new CustomerData(
+            customerPlayerData,
+            customerVideoData,
+            null
+        );
         muxStats = new MuxStatsSDKBitmovinPlayer(
-                this,
+            this,
             playerView,
-                "demo-view-player",
-                customerPlayerData,
-                customerVideoData);
+            "demo-view-player",
+            customerData);
 
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
@@ -157,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
 //                }
             });
             adTypeList.performItemClick(
-                    adTypeList.findViewWithTag(
-                            adTypeList.getAdapter().
-                                    getItem(0)),
-                    0,
-                    adTypeList.getAdapter().getItemId(0));
+                adTypeList.findViewWithTag(
+                    adTypeList.getAdapter().
+                        getItem(0)),
+                0,
+                adTypeList.getAdapter().getItemId(0));
             adTypeList.setSelection(0);
         } catch (Exception e) {
             e.printStackTrace();
