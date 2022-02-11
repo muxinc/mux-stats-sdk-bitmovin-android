@@ -45,7 +45,7 @@ import static android.os.SystemClock.elapsedRealtime;
 import static com.mux.stats.sdk.muxstats.bitmovinplayer.Util.secondsToMs;
 
 public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListener {
-    public static final String TAG = "MuxStatsSDKTHEOplayer";
+    public static final String TAG = "MuxStatsSDKPlayer";
 
     protected MuxStats muxStats;
     protected WeakReference<PlayerView> player;

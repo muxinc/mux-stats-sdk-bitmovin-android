@@ -37,8 +37,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    debugApi "com.mux:stats.muxcore:7.0.9"
-    releaseEmbed "com.mux:stats.muxcore:7.0.9"
+    api "com.mux:stats.muxcore:7.0.9"
+//    releaseEmbed "com.mux:stats.muxcore:7.0.9"
 
     implementation 'com.bitmovin.player:player:3.11.1'
     implementation 'androidx.appcompat:appcompat:1.3.1'
