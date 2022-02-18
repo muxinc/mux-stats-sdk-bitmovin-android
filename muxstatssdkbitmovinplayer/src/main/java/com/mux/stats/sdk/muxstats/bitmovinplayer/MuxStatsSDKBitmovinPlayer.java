@@ -41,6 +41,8 @@ import com.mux.stats.sdk.muxstats.MuxErrorException;
 import com.mux.stats.sdk.muxstats.MuxStats;
 import java.lang.ref.WeakReference;
 import com.bitmovin.player.PlayerView;
+import java.util.ArrayList;
+
 import static android.os.SystemClock.elapsedRealtime;
 import static com.mux.stats.sdk.muxstats.bitmovinplayer.Util.secondsToMs;
 
@@ -66,6 +68,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     protected double playbackPosition;
     public int streamType = -1;
+    ArrayList<IBitmovinPlayerEventsListener> registeredPlayerListeners = new ArrayList<>();
 
 
     public MuxStatsSDKBitmovinPlayer(
@@ -115,6 +118,18 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         player.getPlayer().on(PlayerEvent.AdError.class, onAdErrorListener);
 
         player.getPlayer().on(SourceEvent.Loaded.class, onSourceLoadedListener);
+    }
+
+    public void addBitmovinPlayerEventListener(IBitmovinPlayerEventsListener listener) {
+        if (!registeredPlayerListeners.contains(listener)) {
+            synchronized (this) {
+                registeredPlayerListeners.add(listener);
+            }
+        }
+    }
+
+    public void removeBitmovinPlayerEventListener(IBitmovinPlayerEventsListener listener) {
+        registeredPlayerListeners.remove(listener);
     }
 
     public MuxStatsSDKBitmovinPlayer(Context ctx, final PlayerView player, String playerName,

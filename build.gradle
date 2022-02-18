@@ -50,7 +50,7 @@ allprojects {
 
     project.ext {
         minSdkVersion=16
-        compileSdkVersion=30
+        compileSdkVersion=32
         targetSdkVersion=30
         releaseRepoName = 'bitmovin'
         releaseUserOrg = 'bitmovin'
