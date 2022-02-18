@@ -54,8 +54,10 @@ android {
         }
     }
 
+    flavorDimensions('api')
+
     productFlavors {
-        r3_7_0 {
+        r3_11_1 {
             dimension 'api'
         }
     }
@@ -86,17 +88,10 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     api 'org.checkerframework:checker-qual:2.5.2'
-    androidTestImplementation project(path: ':muxstatssdkbitmovinplayer')
 }
 
 afterEvaluate {
     dependencies {
-//        r2_9_6IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_9_6:'+project.ext.versionName
-//        r2_10_6IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_10_6:'+project.ext.versionName
-//        r2_11_1IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_11_1:'+project.ext.versionName
-//        r2_12_1IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_12_1:'+project.ext.versionName
-//        r2_13_1IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_13_1:'+project.ext.versionName
-//        r2_14_1IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_14_1:'+project.ext.versionName
-//        r2_15_1IsFatAarApi 'com.mux.stats.sdk.muxstats:MuxExoPlayer_r2_15_1:'+project.ext.versionName
+        r3_11_1IsFatAarApi 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:'+project.ext.versionName
     }
 }
