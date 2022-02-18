@@ -6,7 +6,7 @@
  * and conditions of the applicable license agreement.
  */
 
-package com.mux.stats.sdk.muxstats.bitmovinplayer.demo;
+package com.mux.stats.sdk.muxstats.automatedtests.ui;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -40,6 +40,7 @@ import com.bitmovin.player.api.event.PlayerEvent.TimeChanged;
 import com.bitmovin.player.api.event.PlayerEvent.VideoSizeChanged;
 import com.bitmovin.player.api.event.SourceEvent.Loaded;
 import com.bitmovin.player.api.ui.FullscreenHandler;
+import com.mux.stats.sdk.muxstats.automatedtests.R;
 import com.mux.stats.sdk.muxstats.bitmovinplayer.IBitmovinPlayerEventsListener;
 import java.util.Timer;
 import java.util.TimerTask;

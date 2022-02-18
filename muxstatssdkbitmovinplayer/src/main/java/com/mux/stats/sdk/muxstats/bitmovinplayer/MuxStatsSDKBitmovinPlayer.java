@@ -157,7 +157,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
                     listener.onVideoSizeChangedListener(videoChangeEvent);
                 }
             }
-    };
+        };
 
     private final EventListener<PlayerEvent.TimeChanged> onTimeChangeListener =
         timeChangeEvent -> {
@@ -614,7 +614,23 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
         @Override
         public void outputLog(LogPriority logPriority, String s, String s1) {
-
+            switch (logPriority) {
+                case VERBOSE:
+                    Log.v(s, s1);
+                    break;
+                case INFO:
+                    Log.i(s, s1);
+                    break;
+                case DEBUG:
+                    Log.d(s, s1);
+                    break;
+                case WARN:
+                    Log.w(s, s1);
+                    break;
+                case ERROR:
+                    Log.e(s, s1);
+                    break;
+            }
         }
 
         @Override

@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         multiDexEnabled true
         applicationId "com.mux.stats.sdk.muxstats.bitmovinplayer.demo"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -64,7 +64,7 @@ dependencies {
 
 afterEvaluate {
     dependencies {
-        r3_11_1Api 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:'+project.ext.versionName
-        r3_11_1_adsApi 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:'+project.ext.versionName
+//        r3_11_1Api 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:'+project.ext.versionName
+//        r3_11_1_adsApi 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:'+project.ext.versionName
     }
 }

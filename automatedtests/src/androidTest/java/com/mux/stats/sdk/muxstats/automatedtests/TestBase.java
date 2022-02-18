@@ -18,6 +18,7 @@ import androidx.test.runner.lifecycle.Stage;
 import androidx.test.uiautomator.UiDevice;
 import com.bitmovin.player.PlayerView;
 import com.bitmovin.player.api.source.Source;
+import com.bitmovin.player.api.source.SourceType;
 import com.mux.stats.sdk.core.events.playback.PauseEvent;
 import com.mux.stats.sdk.core.events.playback.PlayEvent;
 import com.mux.stats.sdk.core.events.playback.PlayingEvent;
@@ -61,7 +62,9 @@ public abstract class TestBase {
   protected int runHttpServerOnPort = 5000;
   protected int bandwidthLimitInBitsPerSecond = 1500000;
   protected int sampleFileBitrate = 1083904;
-  protected String urlToPlay = "http://localhost:5000/vod.mp4";
+  protected String urlToPlay = "http://localhost:5000/dash/google_glass/playlist.mpd";
+//  protected String urlToPlay = "https://bitdash-a.akamaihd.net/content/sintel/sintel.mpd";
+  SourceType sourceType = SourceType.Dash;
   // UTC timestamp whenlow network bandwidth was triggered
   long startedJammingTheNetworkAt;
   // Amount of video playback time in player buffer
@@ -111,7 +114,7 @@ public abstract class TestBase {
     testActivityFinished = false;
     testActivity.runOnUiThread(() -> {
       testActivity.setVideoTitle(BuildConfig.FLAVOR + "-" + currentTestName.getMethodName());
-      testActivity.setUrlToPlay(urlToPlay);
+      testActivity.setUrlToPlay(urlToPlay, sourceType);
       testActivity.setPlayWhenReady(playWhenReady);
       testActivity.initMuxSats();
       testActivity.setPlaybackStartPosition(playbackStartPosition);

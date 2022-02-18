@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="media_button_width">65dp</dimen>
+    <dimen name="media_button_height">45dp</dimen>
 </resources>

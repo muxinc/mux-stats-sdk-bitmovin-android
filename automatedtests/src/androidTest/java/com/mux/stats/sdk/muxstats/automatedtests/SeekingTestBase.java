@@ -23,8 +23,8 @@ public class SeekingTestBase extends TestBase {
       Thread.sleep(PAUSE_PERIOD_IN_MS);
       // Seek to the end by triggering touch event
       testActivity.runOnUiThread(() -> {
-        long duration = pView.getPlayer().getDuration();
-        pView.getPlayer().seekTo(duration - PLAY_PERIOD_IN_MS);
+        double duration = pView.getPlayer().getDuration();
+        pView.getPlayer().seek(duration - (PLAY_PERIOD_IN_MS/1000));
       });
       Thread.sleep(PLAY_PERIOD_IN_MS);
       finishActivity();
@@ -75,8 +75,8 @@ public class SeekingTestBase extends TestBase {
       Thread.sleep(PLAY_PERIOD_IN_MS);
       // Seek to the end by triggering touch event
       testActivity.runOnUiThread(() -> {
-        long duration = pView.getPlayer().getDuration();
-        pView.getPlayer().seekTo(duration - PLAY_PERIOD_IN_MS);
+        double duration = pView.getPlayer().getDuration();
+        pView.getPlayer().seek(duration - (PLAY_PERIOD_IN_MS/1000));
       });
       Thread.sleep(PLAY_PERIOD_IN_MS);
       finishActivity();

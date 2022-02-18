@@ -6,7 +6,7 @@ import com.mux.stats.sdk.core.events.playback.PlayEvent;
 import com.mux.stats.sdk.core.events.playback.PlayingEvent;
 import com.mux.stats.sdk.core.events.playback.ViewStartEvent;
 import com.mux.stats.sdk.muxstats.automatedtests.mockup.http.SimpleHTTPServer;
-import com.mux.stats.sdk.muxstats.automatedtests.ui.SimplePlayerTestActivity;
+import com.mux.stats.sdk.muxstats.automatedtests.ui.SimplePlayerActivity;
 import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class MissusageTests extends TestBase {
       fail("Failed to start HTTP server, why !!!");
     }
     try {
-      testActivity = (SimplePlayerTestActivity) getActivityInstance();
+      testActivity = (SimplePlayerActivity) getActivityInstance();
     } catch (ClassCastException e) {
       fail("Got wrong activity instance in test init !!!");
     }
@@ -71,7 +71,7 @@ public class MissusageTests extends TestBase {
       // Init test activity but not the Mux stats
       testActivity.runOnUiThread(() -> {
         testActivity.setVideoTitle(BuildConfig.FLAVOR + "-" + currentTestName.getMethodName());
-        testActivity.setUrlToPlay(urlToPlay);
+        testActivity.setUrlToPlay(urlToPlay, sourceType);
         testActivity.startPlayback();
         pView = testActivity.getPlayerView();
         testMediaSource = testActivity.getTestMediaSource();
