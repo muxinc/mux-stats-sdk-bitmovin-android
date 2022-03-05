@@ -10,6 +10,7 @@ import android.util.Log;
 import com.bitmovin.player.api.event.EventListener;
 import com.bitmovin.player.api.event.PlayerEvent;
 import com.bitmovin.player.api.event.SourceEvent;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.mux.stats.sdk.core.MuxSDKViewOrientation;
 import com.mux.stats.sdk.core.events.EventBus;
 import com.mux.stats.sdk.core.events.IEvent;
@@ -24,6 +25,8 @@ import com.mux.stats.sdk.core.events.playback.EndedEvent;
 import com.mux.stats.sdk.core.events.playback.PauseEvent;
 import com.mux.stats.sdk.core.events.playback.PlayEvent;
 import com.mux.stats.sdk.core.events.playback.PlayingEvent;
+import com.mux.stats.sdk.core.events.playback.RebufferEndEvent;
+import com.mux.stats.sdk.core.events.playback.RebufferStartEvent;
 import com.mux.stats.sdk.core.events.playback.RenditionChangeEvent;
 import com.mux.stats.sdk.core.events.playback.SeekedEvent;
 import com.mux.stats.sdk.core.events.playback.SeekingEvent;
@@ -49,6 +52,13 @@ import static com.mux.stats.sdk.muxstats.bitmovinplayer.Util.secondsToMs;
 public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListener {
     public static final String TAG = "MuxStatsSDKPlayer";
 
+    protected static final long TIME_TO_WAIT_AFTER_FIRST_FRAME_RENDERED = 50; // in ms
+
+    public enum PlayerState {
+        BUFFERING, REBUFFERING, SEEKING, SEEKED, ERROR, PAUSED, PLAY, PLAYING, PLAYING_ADS,
+        FINISHED_PLAYING_ADS, INIT, ENDED
+    }
+
     protected MuxStats muxStats;
     protected WeakReference<PlayerView> player;
     protected WeakReference<Context> contextRef;
@@ -62,12 +72,17 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     protected int sourceHeight;
     protected Integer sourceAdvertisedBitrate;
     protected Float sourceAdvertisedFramerate;
-    protected boolean isBuffering;
     protected boolean inAdBreak;
     protected boolean inAdPlayback;
 
     protected double playbackPosition;
     public int streamType = -1;
+    protected PlayerState state;
+    boolean seekingInProgress;
+    boolean firstFrameReceived;
+    protected int numberOfPauseEventsSent = 0;
+    protected int numberOfPlayEventsSent = 0;
+    long firstFrameRenderedAt = 0;
     ArrayList<IBitmovinPlayerEventsListener> registeredPlayerListeners = new ArrayList<>();
 
 
@@ -171,7 +186,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.Play> onPlayListener =
         playEvent -> {
-            dispatch(new PlayEvent(null));
+            play();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onPlayListener(playEvent);
@@ -181,7 +196,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.Playing> onPlayingListener =
         playingEvent -> {
-            dispatch(new PlayingEvent(null));
+            playing();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onPlayingListener(playingEvent);
@@ -191,7 +206,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.Paused> onPausedListener =
         pausedEvent -> {
-            dispatch(new PauseEvent(null));
+            pause();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onPausedListener(pausedEvent);
@@ -201,7 +216,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.PlaybackFinished> onPlaybackFinishedListener =
         playbackFinishedEvent -> {
-            dispatch(new EndedEvent(null));
+            ended();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onPlaybackFinishedListener(playbackFinishedEvent);
@@ -211,7 +226,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.Seek> onSeekListener =
         seekingEvent -> {
-            dispatch(new SeekingEvent(null));
+            seeking();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onSeekListener(seekingEvent);
@@ -221,7 +236,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     private final EventListener<PlayerEvent.Seeked> onSeekedListener =
         seekedEvent -> {
-            dispatch(new SeekedEvent(null));
+            seeked();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onSeekedListener(seekedEvent);
@@ -242,7 +257,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     private final EventListener<PlayerEvent.StallStarted> onStallStartedListener =
         stallStartedEvent -> {
             // Buffering started
-            isBuffering = true;
+            buffering();
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onStallStartedListener(stallStartedEvent);
@@ -253,7 +268,6 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     private final EventListener<PlayerEvent.StallEnded> onStallEndedListener =
         stallEndedEvent -> {
             // Buffering ended
-            isBuffering = false;
             synchronized (MuxStatsSDKBitmovinPlayer.this) {
                 for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
                     listener.onStallEndedListener(stallEndedEvent);
@@ -344,6 +358,105 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         };
 
 
+    protected void buffering() {
+        if (state == PlayerState.REBUFFERING || seekingInProgress
+            || state == PlayerState.SEEKED) {
+            // ignore
+            return;
+        }
+        // If we are going from playing to buffering then this is rebuffer event
+        if (state == PlayerState.PLAYING) {
+            rebufferingStarted();
+            return;
+        }
+        // This is initial buffering event before playback starts
+        state = PlayerState.BUFFERING;
+        dispatch(new TimeUpdateEvent(null));
+    }
+
+    protected void pause() {
+        if (state == PlayerState.SEEKED && numberOfPauseEventsSent > 0) {
+            // No pause event after seeked
+            return;
+        }
+        if (state == PlayerState.REBUFFERING) {
+            rebufferingEnded();
+        }
+        if (seekingInProgress) {
+            seeked();
+            return;
+        }
+        state = PlayerState.PAUSED;
+        dispatch(new PauseEvent(null));
+    }
+
+    protected void play() {
+        // If this is the first play event it may be very important not to be skipped
+        // In all other cases skip this play event
+        if (
+            (state == PlayerState.REBUFFERING
+                || seekingInProgress
+                || state == PlayerState.SEEKED) &&
+                (numberOfPlayEventsSent > 0)
+        ) {
+            // Ignore play event after rebuffering and Seeking
+            return;
+        }
+        state = PlayerState.PLAY;
+        dispatch(new PlayEvent(null));
+    }
+
+    protected void playing() {
+        if (seekingInProgress) {
+            // We will dispatch playing event after seeked event
+            return;
+        }
+        if (state == PlayerState.PAUSED || state == PlayerState.FINISHED_PLAYING_ADS) {
+            play();
+        }
+        if (state == PlayerState.REBUFFERING) {
+            rebufferingEnded();
+        }
+
+        state = PlayerState.PLAYING;
+        dispatch(new PlayingEvent(null));
+    }
+
+    protected void rebufferingStarted() {
+        state = PlayerState.REBUFFERING;
+        dispatch(new RebufferStartEvent(null));
+    }
+
+    protected void rebufferingEnded() {
+        dispatch(new RebufferEndEvent(null));
+    }
+
+    protected void seeking() {
+        if (state == PlayerState.PLAYING) {
+            dispatch(new PauseEvent(null));
+        }
+        state = PlayerState.SEEKING;
+        seekingInProgress = true;
+        firstFrameRenderedAt = -1;
+        dispatch(new SeekingEvent(null));
+        firstFrameReceived = false;
+    }
+
+    protected void seeked() {
+        if (seekingInProgress) {
+            // the player was seeking while paused
+            dispatch(new SeekedEvent(null));
+            seekingInProgress = false;
+            state = PlayerState.SEEKED;
+        }
+    }
+
+    protected void ended() {
+        dispatch(new PauseEvent(null));
+        dispatch(new EndedEvent(null));
+        state = PlayerState.ENDED;
+    }
+
     // IPlayerListener
     @Override
     public long getCurrentPosition() {
@@ -404,7 +517,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     @Override
     public boolean isBuffering() {
-        return isBuffering;
+        return state == PlayerState.BUFFERING;
     }
 
     @Override

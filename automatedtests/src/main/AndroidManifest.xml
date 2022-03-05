@@ -12,21 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme"
-        tools:targetApi="m">
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+        android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.SimplePlayerTestActivity"
+            android:name=".ui.SimplePlayerActivity"
             android:configChanges="keyboardHidden"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat" />
+
+<!--        <service android:name="com.bitmovin.player.offline.service.BitmovinDownloadService"-->
+<!--          android:exported="true"-->
+<!--          tools:node="merge" />-->
+
+        <meta-data
+          android:name="BITMOVIN_PLAYER_LICENSE_KEY"
+          android:value="19b8c66d-12c4-424c-920e-2f4748e00a32"/>
     </application>
 
 </manifest>
