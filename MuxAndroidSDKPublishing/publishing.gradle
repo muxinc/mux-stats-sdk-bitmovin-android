@@ -32,6 +32,7 @@ if(isAReleaseBuild) {
 }
 
 println("Evaluated building for version "+packageVersionName)
+println("artifactoryPassword>>> "+artifactoryPassword)
 
 allprojects {
     apply plugin: "com.jfrog.artifactory"
