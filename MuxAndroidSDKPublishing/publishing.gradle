@@ -13,8 +13,12 @@ Properties properties = new Properties()
 def propertiesFile = project.rootProject.file('local.properties')
 if (propertiesFile.exists()) {
     properties.load(propertiesFile.newDataInputStream())
-    artifactoryUsername = properties.getProperty('artifactory_user')
-    artifactoryPassword = properties.getProperty('artifactory_password')
+    if(properties.containsKey('artifactory_user')) {
+        artifactoryUsername = properties.getProperty('artifactory_user')
+    }
+    if(properties.containsKey('artifactory_password')) {
+        artifactoryPassword = properties.getProperty('artifactory_password')
+    }
 }
 
 apply from: 'MuxAndroidSDKPublishing/git_utils.gradle', to: ext
@@ -32,7 +36,6 @@ if(isAReleaseBuild) {
 }
 
 println("Evaluated building for version "+packageVersionName)
-println("artifactoryPassword>>> "+artifactoryPassword)
 
 allprojects {
     apply plugin: "com.jfrog.artifactory"
