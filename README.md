@@ -30,7 +30,7 @@ allprojects {
 ```
 
 ### Add the SDK as a Dependency in your application
-Add one the following lines to the `dependencies` block in your app module's `build.gradle`, depending on which bitmovin library you are using. The current version can be found in our [Integration Guide](https://docs.mux.com/docs/bitmovin-integration-guide)
+Add one the following lines to the `dependencies` block in your app module's `build.gradle`, depending on which bitmovin library you are using. The current version can be found on our [Releases Page](https://github.com/muxinc/mux-stats-sdk-bitmovin-android/releases)
 
 ```groovy
 implementation 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer:[CurrentVersion]'
