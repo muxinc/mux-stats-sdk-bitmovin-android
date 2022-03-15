@@ -74,9 +74,8 @@ apply from: '../MuxAndroidSDKPublishing/declare_publication.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api "com.mux:stats.muxcore:7.0.10"
-    // buildkite builds seem to require explicitly depending on appcompat. 1.+ covers pretty much
-    //  any version that bitmovin/downstream would specify
-    implementation 'androidx.appcompat:appcompat:1.+'
+    // Let bitmovin SDK
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.bitmovin.player:player:3.11.1'
 
     testImplementation 'junit:junit:4.12'
