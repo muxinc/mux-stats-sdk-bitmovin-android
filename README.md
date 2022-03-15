@@ -33,14 +33,11 @@ allprojects {
 Add one the following lines to the `dependencies` block in your app module's `build.gradle`, depending on which bitmovin library you are using. The current version can be found in our [Integration Guide](https://docs.mux.com/docs/bitmovin-integration-guide)
 
 ```groovy
-// Use this line for the minApi 16 version of Theoplayer
-implementation 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer:[CurrentVersion]'
-// Use this line for the minApi 21 version of Theoplayer
 implementation 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer:[CurrentVersion]'
 ```
 
-### Monitor Bitmovin using Mux Data
-The Mux Data SDK for THEOPlayer can be used by creating a new instance of `MuxStatsSDKTHEOPlayer` with the desired configuration. The constructor requires a `THEOplayerView`, which Mux will observe for data events.
+### Monitor Bitmovin Player using Mux Data
+The Mux Data SDK for Bitmovin Player can be used by creating a new instance of `MuxStatsBitmovinPlayer` with the desired configuration. The constructor requires a `MuxStatsBitmovinPlayer`, which Mux will observe for data events.
 
 ```java
 // Initialize with data about you, your video, and your app
@@ -63,7 +60,7 @@ muxStatsBitmovin = new MuxStatsSDKBitmovinPlayer(
 // Set the size of the screen
 Point size = new Point();
 getWindowManager().getDefaultDisplay().getSize(size);
-muxStatsSDKTHEOplayer.setScreenSize(size.x, size.y);
+muxStatsBitmovin.setScreenSize(size.x, size.y);
 ```
 
 You must also release the `MuxStatsSDKBitmovinPlayer` object when your component's lifecycle is ending. For example:
@@ -75,9 +72,6 @@ public void onDestroy() {
     super.onDestroy();
 }
 ```
-
-### Further Reading
-See full integration instructions here: https://docs.mux.com/docs/bitmovin-integration-guide.
 
 ## Releases
 The current version of the SDK is `v0.5.0`, as of 3/14/2022
