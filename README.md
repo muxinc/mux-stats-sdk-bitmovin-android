@@ -1,4 +1,4 @@
-# Mux Stats SDK Bitmovin
+# Mux Stats SDK for Bitmovin Android Player
 
 This is the Mux wrapper around the Bitmovin player SDK, built on top of Mux's core Java library,
 providing Mux Data performance analytics for applications utilizing
