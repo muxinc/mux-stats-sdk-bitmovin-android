@@ -1,0 +1,14 @@
+env:
+  SAUCECTL_LABEL: "$BUILDKITE_BUILD_NUMBER $BUILDKITE_PIPELINE_SLUG $BUILDKITE_BRANCH $BUILDKITE_COMMIT"
+steps:
+- agents: [dind=true,queue=beta]
+  command: ./.buildkite/publish.sh
+  label: Build AARs and APKs
+  plugins:
+    - artifacts#v1.3.0:
+        upload:
+          - "muxstatssdkbitmovinplayer/buildout/outputs/aar/*.aar"
+          - "muxstatssdkbitmovinplayer/buildout/outputs/mapping/*/*.txt"
+          - "muxstatssdkbitmovinplayer/buildout/outputs/version-*"
+          - "muxstatssdkbitmovinplayer/buildout/reports/*/*.*"
+          - "automatedtests/buildout/outputs/apk/androidTest/**/*.apk"
