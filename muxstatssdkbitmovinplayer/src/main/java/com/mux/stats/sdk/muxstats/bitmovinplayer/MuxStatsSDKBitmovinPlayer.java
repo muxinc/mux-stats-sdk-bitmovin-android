@@ -370,7 +370,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         muxStats.presentationChange(MuxSDKViewPresentation.NORMAL);
       };
 
-  protected void buffering() {
+    protected void buffering() {
         if (state == PlayerState.REBUFFERING || seekingInProgress
             || state == PlayerState.SEEKED) {
             // ignore
