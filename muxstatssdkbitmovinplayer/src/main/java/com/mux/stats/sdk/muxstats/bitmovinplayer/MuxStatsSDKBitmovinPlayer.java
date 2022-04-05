@@ -111,7 +111,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             dispatch(new TimeUpdateEvent(null));
         }
 
-        player.getPlayer()on(PlayerEvent.Error.class, onPlayerErrorListener);
+        player.getPlayer().on(PlayerEvent.Error.class, onPlayerErrorListener);
         // Handle rendition change
         player.getPlayer().on(PlayerEvent.VideoSizeChanged.class, onVideoSizeChangeListener);
         player.getPlayer().on(PlayerEvent.TimeChanged.class, onTimeChangeListener);
