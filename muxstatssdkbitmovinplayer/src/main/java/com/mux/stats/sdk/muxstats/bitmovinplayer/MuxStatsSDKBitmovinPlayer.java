@@ -41,6 +41,7 @@ import com.mux.stats.sdk.muxstats.INetworkRequest;
 import com.mux.stats.sdk.muxstats.IPlayerListener;
 import com.mux.stats.sdk.muxstats.LogPriority;
 import com.mux.stats.sdk.muxstats.MuxErrorException;
+import com.mux.stats.sdk.muxstats.MuxSDKViewPresentation;
 import com.mux.stats.sdk.muxstats.MuxStats;
 import java.lang.ref.WeakReference;
 import com.bitmovin.player.PlayerView;
@@ -84,7 +85,6 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
     protected int numberOfPlayEventsSent = 0;
     long firstFrameRenderedAt = 0;
     ArrayList<IBitmovinPlayerEventsListener> registeredPlayerListeners = new ArrayList<>();
-
 
     public MuxStatsSDKBitmovinPlayer(
         Context ctx,
@@ -133,6 +133,9 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         player.getPlayer().on(PlayerEvent.AdError.class, onAdErrorListener);
 
         player.getPlayer().on(SourceEvent.Loaded.class, onSourceLoadedListener);
+
+        player.getPlayer().on(PlayerEvent.FullscreenEnabled.class, onFullscreenEnabledListener);
+        player.getPlayer().on(PlayerEvent.FullscreenDisabled.class, onFullscreenDisabledListener);
     }
 
     public void addBitmovinPlayerEventListener(IBitmovinPlayerEventsListener listener) {
@@ -357,6 +360,15 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             }
         };
 
+    private final EventListener<PlayerEvent.FullscreenEnabled> onFullscreenEnabledListener =
+      fullscreenEnabledEvent -> {
+        muxStats.presentationChange(MuxSDKViewPresentation.FULLSCREEN);
+      };
+
+    private final EventListener<PlayerEvent.FullscreenDisabled> onFullscreenDisabledListener =
+      fullscreenDisabledEvent -> {
+        muxStats.presentationChange(MuxSDKViewPresentation.NORMAL);
+      };
 
     protected void buffering() {
         if (state == PlayerState.REBUFFERING || seekingInProgress
