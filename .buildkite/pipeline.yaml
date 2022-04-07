@@ -12,3 +12,12 @@ steps:
           - "muxstatssdkbitmovinplayer/buildout/outputs/version-*"
           - "muxstatssdkbitmovinplayer/buildout/reports/*/*.*"
           - "automatedtests/buildout/outputs/apk/androidTest/**/*.apk"
+- wait
+- block: ":rocket: Deploy and release!"
+  blocked_state: failed
+  branches: "master"
+- wait
+- agents: [queue=default-beta]
+  command: ./.buildkite/deploy.sh
+  label: Deploy artifacts to release maven if it all worked
+  branches: "master"
