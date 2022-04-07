@@ -32,8 +32,11 @@ allprojects {
 ### Add the SDK as a Dependency in your application
 Add one the following lines to the `dependencies` block in your app module's `build.gradle`, depending on which bitmovin library you are using. The current version can be found on our [Releases Page](https://github.com/muxinc/mux-stats-sdk-bitmovin-android/releases)
 
+#### Bitmovin Player support 
+We support version `3.11.1` of Bitmovin Player. Support for additional versions is planned
+
 ```groovy
-implementation 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer:[CurrentVersion]'
+implementation 'com.mux.stats.sdk.muxstats:muxstatssdkbitmovinplayer_r3_11_1:[CurrentVersion]'
 ```
 
 ### Monitor Bitmovin Player using Mux Data
