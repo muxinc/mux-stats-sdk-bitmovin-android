@@ -1,8 +1,7 @@
 env:
   SAUCECTL_LABEL: "$BUILDKITE_BUILD_NUMBER $BUILDKITE_PIPELINE_SLUG $BUILDKITE_BRANCH $BUILDKITE_COMMIT"
 steps:
-- agents: [queue=default-beta]
-  command: ./.buildkite/publish.sh
+- command: ./.buildkite/publish.sh
   label: Build AARs and APKs
   plugins:
     - artifacts#v1.3.0:
@@ -17,7 +16,6 @@ steps:
   blocked_state: failed
   branches: "master"
 - wait
-- agents: [queue=default-beta]
-  command: ./.buildkite/deploy.sh
+- command: ./.buildkite/deploy.sh
   label: Deploy artifacts to release maven if it all worked
   branches: "master"
