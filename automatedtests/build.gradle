@@ -16,6 +16,7 @@ android {
         buildConfigField("boolean", "SHOULD_REPORT_INSTRUMENTATION_TEST_EVENTS_TO_SERVER", "true")
         buildConfigField("String", "INSTRUMENTATION_TEST_ENVIRONMENT_KEY", "\"YOUR KEY HERE\"")
         var bitmovinLicense = System.getenv("BITMOVIN_LICENSE") == null ? "NOT_CONFIGURED" : System.getenv("BITMOVIN_LICENSE")
+        println("\n\n\n\n\nHEY! My Bitmovin license is $bitmovinLicense\n\n\n\n\n")
         manifestPlaceholders.bitmovinLicense = bitmovinLicense
     }
 
