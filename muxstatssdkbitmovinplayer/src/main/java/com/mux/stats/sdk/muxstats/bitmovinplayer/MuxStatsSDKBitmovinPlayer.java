@@ -519,7 +519,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     @Override
     public Long getSourceDuration() {
-        return secondsToMs(player.get().getPlayer().getDuration());
+        return secondsToMs(playbackPosition);
     }
 
     @Override
