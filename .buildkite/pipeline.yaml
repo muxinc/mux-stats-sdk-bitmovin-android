@@ -14,8 +14,6 @@ steps:
 - wait
 - block: ":rocket: Deploy and release!"
   blocked_state: failed
-  branches: "master"
 - wait
 - command: ./.buildkite/deploy.sh
   label: Deploy artifacts to release maven if it all worked
-  branches: "master"

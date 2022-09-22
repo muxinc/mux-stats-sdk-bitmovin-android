@@ -1,0 +1,520 @@
+{
+  "version" : "1.0.1",
+  "name" : "Mux Stats SDK Bitmovinplayer",
+  "number" : "1663877597789",
+  "buildAgent" : {
+    "name" : "Gradle",
+    "version" : "7.2"
+  },
+  "agent" : {
+    "name" : "Gradle",
+    "version" : "7.2"
+  },
+  "started" : "2022-09-22T13:13:17.672-0700",
+  "durationMillis" : 2224,
+  "principal" : "edixon",
+  "artifactoryPrincipal" : "android-sdk@mux.com",
+  "artifactoryPluginVersion" : "Unknown",
+  "vcs" : [ ],
+  "modules" : [ {
+    "type" : "gradle",
+    "id" : "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified",
+    "repository" : "default-maven-local",
+    "artifacts" : [ {
+      "type" : "aar",
+      "sha1" : "3afda0a17472e3208c7855a6f6df7d4f614514c8",
+      "sha256" : "b716c9cc53598a0dd1549923a4b6d668eb6e2676b012f9cd89921433ed33a2ee",
+      "md5" : "711877f7cd0d24150403333e9e41ceaf",
+      "name" : "muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.aar",
+      "path" : "com/mux/stats/sdk/muxstats/muxstatssdkbitmovinplayer_r3_11_1/dev-asidkj-caf721f/muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.aar"
+    }, {
+      "type" : "module",
+      "sha1" : "21e8c5f7e2cffb9ff2fc65e95c7dadcc732e685d",
+      "sha256" : "9bd04ffffd4a7f575c19fc9672c15ffe860c924b905b34ae050321b3791b7d8b",
+      "md5" : "133b9d0893c9fa9d5d99e3173df5af85",
+      "name" : "muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.module",
+      "path" : "com/mux/stats/sdk/muxstats/muxstatssdkbitmovinplayer_r3_11_1/dev-asidkj-caf721f/muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.module"
+    }, {
+      "type" : "pom",
+      "sha1" : "28874e858cab0f0c98ee102f28e07c9e5db4c82c",
+      "sha256" : "9fc46ed66a62a24b0423a026c4f64d749cb176cbcf3774b94b0133b998b7130d",
+      "md5" : "19d1433a5c1ea95ce2d3684165d91e4c",
+      "name" : "muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.pom",
+      "path" : "com/mux/stats/sdk/muxstats/muxstatssdkbitmovinplayer_r3_11_1/dev-asidkj-caf721f/muxstatssdkbitmovinplayer_r3_11_1-dev-asidkj-caf721f.pom"
+    } ],
+    "excludedArtifacts" : [ ],
+    "dependencies" : [ {
+      "type" : "jar",
+      "sha1" : "37b2896c3f5dc5e23ca5154c0410bc0321ff95ed",
+      "sha256" : "d1fe6fd74046985c2dc1f1c982e2da5ad4be6c910c974d8cdbfec20cc0ce7114",
+      "md5" : "54ae8801871e4f95a3eccba909487965",
+      "id" : "com.mux:stats.muxcore:7.0.10",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "6487c8711252a8680baaa854247141cc1d2098f4",
+      "sha256" : "3d2131a55a61a777322e2126e0018011efa6339e53b44153eb651b16020cca70",
+      "md5" : "f867895f07fa53e100f5de03da7fa412",
+      "id" : "androidx.appcompat:appcompat:1.2.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "8ded77e8322700adcf10b6c7f1618c92ae263bc2",
+      "sha256" : "38a3113ed212e953a22878c1f9a0faf38ba22e926fad9f1046647f0b77a29970",
+      "md5" : "b50687357cb8a3d5dbb32e2d2f293fd9",
+      "id" : "com.bitmovin.player:player:3.11.1",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "60dd4a83272429cf5dc913613ef86aa75cfa75df",
+      "sha256" : "e0e54ca975c74cdfa5d7e3656d9d1c35b085a855a591784c8288fd8a18922a1e",
+      "md5" : "0195f6441584f7cff3158a8a7a078369",
+      "id" : "com.bitmovin.player:exoplayer-core:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "52a257f30cfb5f7ef7a10df3d3b326840862b059",
+      "sha256" : "d7b9ba1d6425b97b6873c9950c83ae5313ff281fc1b8feca3706d1db2ab4a0d4",
+      "md5" : "f7a3e7ac0e4930d45d87432cf8d99371",
+      "id" : "com.bitmovin.player:exoplayer-common:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:exoplayer-core:1.0.48", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "60458f877d055d0c9114d9e1a2efb737b4bc282c",
+      "sha256" : "a42edc9cab792e39fe39bb94f3fca655ed157ff87a8af78e1d6ba5b07c4a00ab",
+      "md5" : "e37782d974104aa3b0a7bee9927c8042",
+      "id" : "com.google.guava:guava:31.1-jre",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "1dcf1de382a0bf95a3d8b0849546c88bac1292c9",
+      "sha256" : "a171ee4c734dd2da837e4b16be9df4661afab72a41adaf31eb84dfdaf936ca26",
+      "md5" : "091883993ef5bfa91da01dcc8fc52236",
+      "id" : "com.google.guava:failureaccess:1.0.1",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "b421526c5f297295adef1c886e5246c39d4ac629",
+      "sha256" : "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99",
+      "md5" : "d094c22570d65e132c19cea5d352e381",
+      "id" : "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "d5692f0526415fcc6de94bb5bfbd3afd9dd3b3e5",
+      "sha256" : "ff10785ac2a357ec5de9c293cb982a2cbb605c0309ea4cc1cb9b9bc6dbe7f3cb",
+      "md5" : "ab1ae0e2f2f63601597a5a96fca8a54f",
+      "id" : "org.checkerframework:checker-qual:3.12.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "e4ba98f1d4b3c80ec46392f25e094a6a2e58fcbf",
+      "sha256" : "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308",
+      "md5" : "5b730d97e4e6368069de1983937c508e",
+      "id" : "org.apache.commons:commons-math3:3.6.1",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "5f9efc7569e651415a0958d6b3e6226ef2825c24",
+      "sha256" : "a14c8b8f2153f128e800fbd266a6beab1c283982a29ec570d2cc05d307d81496",
+      "md5" : "a7147fdbc0f0f36b0a86e30ef613341e",
+      "id" : "androidx.fragment:fragment:1.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "ad67e51b92364585bb335177664959001644327a",
+      "sha256" : "c470297c03ff3de1c3d15dacf0be0cae63abc10b52f021dd07ae28daa3100fe5",
+      "md5" : "f77eebe04fdcfe319d61c6df92fb232b",
+      "id" : "androidx.appcompat:appcompat-resources:1.2.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "dd02c7e207136e1272b33815cc61e57676ed13a2",
+      "sha256" : "9402442cdc5a43cf62fb14f8cf98c63342d4d9d9b805c8033c6cf7e802749ac1",
+      "md5" : "8c4e87d298c8f10193afe7e8c66ddc66",
+      "id" : "androidx.drawerlayout:drawerlayout:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "1f90e13820f96c2fb868f9674079a551678d68b2",
+      "sha256" : "147af4e14a1984010d8f155e5e19d781f03c1d70dfed02a8e0d18428b8fc8682",
+      "md5" : "13a64cd1613b1e97d925c68086bd269a",
+      "id" : "androidx.viewpager:viewpager:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "8af8b6cec0da85c207d03e15840e0722cbc71e70",
+      "sha256" : "11f735cb3b55c458d470bed9e25254375b518b4b1bad6926783a7026db0f5025",
+      "md5" : "1d3b36075b8b5a21b9d26f4c0237548f",
+      "id" : "androidx.loader:loader:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "ed7a64df6e3fbebf7d3d3dfc30b0f47efcc707f7",
+      "sha256" : "d1bc9842455c2e534415d88c44df4d52413b478db9093a1ba36324f705f44c3d",
+      "md5" : "4af531df14f0183a79461240ca647de7",
+      "id" : "androidx.activity:activity:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "fcda1161354501471c30a4e077af6b5c4d4eddc6",
+      "sha256" : "76da2c502371d9c38054df5e2b248d00da87809ed058f3363eae87ce5e2403f8",
+      "md5" : "aec84ef05b190deb14d134bc5d0ae071",
+      "id" : "androidx.vectordrawable:vectordrawable-animated:1.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat-resources:1.2.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "eac7a364fff534035a2a6cb17770a1288315f69f",
+      "sha256" : "46fd633ac01b49b7fcabc263bf098c5a8b9e9a69774d234edcca04fb02df8e26",
+      "md5" : "191c1f126c420a27272c141ccf5def8e",
+      "id" : "androidx.vectordrawable:vectordrawable:1.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat-resources:1.2.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "30f5ff6075d112f8076e733b24410e68159735b6",
+      "sha256" : "20e5b8f6526a34595a604f56718da81167c0b40a7a94a57daa355663f2594df2",
+      "md5" : "d2e67144855e533cde1edd4c3c6d9a3e",
+      "id" : "androidx.customview:customview:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.viewpager:viewpager:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "2b792b23bbfb39ebb7c11e5e88f88e592629aca7",
+      "sha256" : "890ee6fa20c22bdb90f5ef28d58561f2bdcb0e250c77c34e9833e367b0a1b417",
+      "md5" : "3d4c676ce839ec53f60ce4a9c7073ac7",
+      "id" : "com.bitmovin.player:exoplayer-ui:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "c65bd9123307695adcee5240c44e6cfcb403fd16",
+      "sha256" : "24c6ca0c281b27dec054a09ae584028266683274ca8f53b230470ff404a7d3f4",
+      "md5" : "c651214a652933b64ccbb73cb12ec061",
+      "id" : "androidx.media:media:1.3.1",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:exoplayer-ui:1.0.48", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "18a4755efb834c487bac7062e508465f0c853218",
+      "sha256" : "94de196cd67950cff6ef3e1ac59015f8eaaf61840bdc238f2cf54ddef8dd0be9",
+      "md5" : "8483597eb25dbc11219394c5683b41f7",
+      "id" : "androidx.core:core:1.3.2",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "74014983a86b83cbce534dec4e7aa9312f5f5d82",
+      "sha256" : "a81c8fe78815fa47df5b749deb52727ad11f9397da58b16017f4eb2c11e28564",
+      "md5" : "7db84f5847edcd4556f6c5a43394073b",
+      "id" : "androidx.cursoradapter:cursoradapter:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "24af6c5162c83b5bf073e16608fd87821422fe48",
+      "sha256" : "e5173897b965e870651e83d9d5af1742d3f532d58863223a390ce3a194c8312b",
+      "md5" : "43dd4c735c6601602b751ed7478fc2c9",
+      "id" : "androidx.lifecycle:lifecycle-runtime:2.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.core:core:1.3.2", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "91acce73e00a17b524f6697f6c3893efb8ea349f",
+      "sha256" : "9a1d77140ac222b7866b5054ee7d159bc1800987ed2d46dd6afdd145abb710c1",
+      "md5" : "a1649e0bd50280c0bc4d15ec37b547a3",
+      "id" : "androidx.versionedparcelable:versionedparcelable:1.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.core:core:1.3.2", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "1f27220b47669781457de0d600849a5de0e89909",
+      "sha256" : "632a0e5407461de774409352940e292a291037724207a787820c77daf7d33b72",
+      "md5" : "2fdca6c8f8c7c7bcf05fb199f7d58631",
+      "id" : "androidx.collection:collection:1.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.versionedparcelable:versionedparcelable:1.1.0", "androidx.core:core:1.3.2", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "682d06cc95e0632efdb9cfcc18828840ac941148",
+      "sha256" : "ba55fb7ac1b2828d5327cda8acf7085d990b2b4c43ef336caa67686249b8523d",
+      "md5" : "6dea5a72a2aabe31c9db4756ae17e1bf",
+      "id" : "androidx.lifecycle:lifecycle-viewmodel:2.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.loader:loader:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "6d39721808cd67e3d3d0d60f194907615fcaa69c",
+      "sha256" : "2510a5619c37579c9ce1a04574faaf323cd0ffe2fc4e20fa8f8f01e5bb402e83",
+      "md5" : "0ad3a953249dc818c621d141b3ec38b2",
+      "id" : "androidx.savedstate:savedstate:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.activity:activity:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "c17007cd0b21d6401910b0becdd16c438c68a9af",
+      "sha256" : "c82609ced8c498f0a701a30fb6771bb7480860daee84d82e0a81ee86edf7ba39",
+      "md5" : "c6a762327c8d69fe89d45bd1b422d2f4",
+      "id" : "androidx.lifecycle:lifecycle-livedata:2.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.loader:loader:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "1a7cee84b43fa935231b016f0665cd56a72fa9db",
+      "sha256" : "fde334ec7e22744c0f5bfe7caf1a84c9d717327044400577bdf9bd921ec4f7bc",
+      "md5" : "205e67fef4d27e49206a8006782fe2e7",
+      "id" : "androidx.lifecycle:lifecycle-livedata-core:2.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.lifecycle:lifecycle-livedata:2.0.0", "androidx.loader:loader:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "c67e7807d9cd6c329b9d0218b2ec4e505dd340b7",
+      "sha256" : "76db6be533bd730fb361c2feb12a2c26d9952824746847da82601ef81f082643",
+      "md5" : "4ac0556cb728bebe1769cf1721bc974e",
+      "id" : "androidx.lifecycle:lifecycle-common:2.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.lifecycle:lifecycle-runtime:2.1.0", "androidx.activity:activity:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "c5be9edf9ca9135a465d23939f6e7d0e1cf90b41",
+      "sha256" : "87e65fc767c712b437649c7cee2431ebb4bed6daef82e501d4125b3ed3f65f8e",
+      "md5" : "7ce66dded8f100680b845357642b9093",
+      "id" : "androidx.arch.core:core-runtime:2.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.lifecycle:lifecycle-livedata:2.0.0", "androidx.loader:loader:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "b3152fc64428c9354344bd89848ecddc09b6f07e",
+      "sha256" : "fe1237bf029d063e7f29fe39aeaf73ef74c8b0a3658486fc29d3c54326653889",
+      "md5" : "c57c77e351c0c7e5500975646aa60766",
+      "id" : "androidx.arch.core:core-common:2.1.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.lifecycle:lifecycle-runtime:2.1.0", "androidx.activity:activity:1.0.0", "androidx.fragment:fragment:1.1.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "8a01fa254a23b9388571eb6334b03707c7d122d7",
+      "sha256" : "33193135a64fe21fa2c35eec6688f1a76e512606c0fc83dc1b689e37add7732a",
+      "md5" : "bc916a48058ec614808d1b46d1a37629",
+      "id" : "androidx.interpolator:interpolator:1.0.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.vectordrawable:vectordrawable-animated:1.1.0", "androidx.appcompat:appcompat-resources:1.2.0", "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "57136ff68ee784c6e19db34ed4a175338fadfde1",
+      "sha256" : "9029262bddce116e6d02be499e4afdba21f24c239087b76b3b57d7e98b490a36",
+      "md5" : "9120b153f33a2d61a6252935839f6d4e",
+      "id" : "androidx.annotation:annotation:1.2.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "androidx.appcompat:appcompat:1.2.0", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "3f6b4bd4f8dbe8d4bea06d107a3826469b85c3e9",
+      "sha256" : "baf3c7fe15fefeaf9e5b000d94547379dc48370f22a8797e239c127e7d7756ec",
+      "md5" : "d18638036e314cdd66f04e2d248b7df9",
+      "id" : "org.slf4j:slf4j-api:1.7.24",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:exoplayer-core:1.0.48", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "55ced3da56bcb5a61980c8a1da57137d49c04167",
+      "sha256" : "23dd8f084d55d8d9a66a73ba9a6eaf9f36b6d919cea5afd3ea150e163beba8b0",
+      "md5" : "a1169dcb2e09f002342206eb00d67578",
+      "id" : "com.bitmovin.player:exoplayer-extractor:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:exoplayer-core:1.0.48", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "047a12842c268ce8753910df516be4e83b56fbb2",
+      "sha256" : "10cdab0a15992f1739c8b35dc7c0cea94422d6fa9ab6c4d46ce402a15447eb11",
+      "md5" : "5932147f64c153f5207bea599dfea615",
+      "id" : "com.bitmovin.player:exoplayer-dash:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "f0fcc75083def5f508a9e8f42ddb6dbde692c31a",
+      "sha256" : "58b1904369af07f5098fc3cbccd96effea847d927299e6ad3268f354b7489ed4",
+      "md5" : "1e1b5cba02c72706b733ad94381f4d66",
+      "id" : "com.bitmovin.player:exoplayer-hls:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "0252c8c384188a1de60e25d53269abb15cc11276",
+      "sha256" : "7e15a441f3f8f2ff199138a829cf03359b179acb0685f28bc68e0608cf9c8f78",
+      "md5" : "a0ad34c6f33976ae28c8ee0fd70ad774",
+      "id" : "com.bitmovin.player:exoplayer-smoothstreaming:1.0.48",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "3f4af7aff21c4ec46e3cdd645639d0a63a68d3d0",
+      "sha256" : "270b05aa3cc92f157a7ed71ff09cf136ee3fb18cbac94f71a12931009c49f550",
+      "md5" : "be68e5ac398192bbcccd4fbffee0d292",
+      "id" : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "c49d0703d16c6cb1526cc07b9b46486da1dd8a60",
+      "sha256" : "75ed5680aaacfd94b93c3695d8eb8bfa7cf83893d2e46ca9788345c52d393f8a",
+      "md5" : "7879a1ae5a58cfd4f2bb431a6395b606",
+      "id" : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "da6a904b132f0402fa4d79169a3c1770598d4702",
+      "sha256" : "ca87c454cd3f2e60931f1803c59699d510d3b4b959cd7119296fb947581d722d",
+      "md5" : "61e38da7aea19c1a1cdf0878262f18f1",
+      "id" : "org.jetbrains.kotlin:kotlin-stdlib:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "919f0dfe192fb4e063e7dacadee7f8bb9a2672a9",
+      "sha256" : "ace2a10dc8e2d5fd34925ecac03e4988b2c0f851650c94b8cef49ba1bd111478",
+      "md5" : "f4fb462172517b46b6cd90003508515a",
+      "id" : "org.jetbrains:annotations:13.0",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlin:kotlin-stdlib:1.5.10", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "06b84d926e28493be69daf673e40076f89492ef7",
+      "sha256" : "d958ce94beda85f865829fb95012804866db7d5246615fd71a2f5aabca3e7994",
+      "md5" : "8dd7ea9ffd30df4c09e8d9baeadc95a5",
+      "id" : "org.jetbrains.kotlin:kotlin-stdlib-common:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseCompileClasspath", "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlin:kotlin-stdlib:1.5.10", "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.10", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "26ba2ec0e791a32ea5dfbedfcebf36447ee5b12c",
+      "sha256" : "3eddf6d9d50e770650e62abe62885f4393aa911430ecde73ebafb1ffd2cfad16",
+      "md5" : "3d41378ea638eb427735b5d6e585ac0c",
+      "id" : "org.json:json:20180130",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "aar",
+      "sha1" : "7f5235de0ec08c31d4f6cccdd0dcaa58b7f9ef6b",
+      "sha256" : "a1ea0329ee6d938305dfd0f8ce5c48dea2aac14e5606d23e7fb60afcfb655d6e",
+      "md5" : "4c7c87151df88efe8e3b25d634874896",
+      "id" : "androidx.recyclerview:recyclerview:1.2.1",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:exoplayer-ui:1.0.48", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "c1df91b076cf9a1af564bb7edd41c49683169e25",
+      "sha256" : "7099198391d673c199fea084423d9f3fdc79470acba19111330c7f88504279c7",
+      "md5" : "111a33c5f32964013d38e0d78bbdf9f3",
+      "id" : "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "d8cebccdcddd029022aa8646a5a953ff88b13ac8",
+      "sha256" : "78d6cc7135f84d692ff3752fcfd1fa1bbe0940d7df70652e4f1eaeec0c78afbb",
+      "md5" : "0a0d2e63b7d71b97778cbd41bb3dfce0",
+      "id" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.0",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0", "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "37f48be9c9be4b8c74bf5a5aa17050c18581a370",
+      "sha256" : "749f01fa8b958f5d1681099a3b5c20bb1b8198597076fb785e93c3c1b648f357",
+      "md5" : "a24f2d06bdc3ab066175c6d20432b036",
+      "id" : "org.jetbrains.kotlin:kotlin-parcelize-runtime:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "1d31897e6b73e7672e111856dfb7dd65be35d259",
+      "sha256" : "1196a7bfa1d0db9971f5de1a26b3793ca424d3366706b71f6b85c065daab4e11",
+      "md5" : "f278e919c869b22d902a8de5430a5166",
+      "id" : "com.google.dagger:dagger:2.39.1",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "3edcfe49d2c6053a70a2a47e4e1c2f94998a49cf",
+      "sha256" : "b7134929f7cc7c04021ec1cc27ef63ab907e410cf0588e397b8851181eb91092",
+      "md5" : "2330bde3467e7cfec44d38e74f27dab8",
+      "id" : "com.google.code.gson:gson:2.8.2",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "6c6c702c89bfff3cd9e80b04d668c5e190d588c6",
+      "sha256" : "8ac96fc686512d777fca85e144f196cd7cfe0c0aec23127229497d1a38ff651c",
+      "md5" : "780b5a8b72eebe6d0dbff1c11b5658fa",
+      "id" : "org.apache.commons:commons-lang3:3.5",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "2852e6e05fbb95076fc091f6d1780f1f8fe35e0f",
+      "sha256" : "a10418348d234968600ccb1d988efcbbd08716e1d96936ccc1880e7d22513474",
+      "md5" : "e2d74794fba570ec2115fb9d5b05dc9b",
+      "id" : "commons-io:commons-io:2.5",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "25ea2e8b0c338a877313bd4672d3fe056ea78f0d",
+      "sha256" : "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+      "md5" : "dd83accb899363c32b07d7a1b2e4ce40",
+      "id" : "com.google.code.findbugs:jsr305:3.0.2",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "c5a0ace696d3f8b1c1d8cc036d8c03cc0cbe6b69",
+      "sha256" : "721cb91842b46fa056847d104d5225c8b8e1e8b62263b993051e1e5a0137b7ec",
+      "md5" : "656ad66261b7e7ea472ed0ffeea773ea",
+      "id" : "com.google.errorprone:error_prone_annotations:2.11.0",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "ba035118bc8bac37d7eff77700720999acd9986d",
+      "sha256" : "21af30c92267bd6122c0e0b4d20cccb6641a37eaf956c6540ec471d584e64a7b",
+      "md5" : "5fa4ec4ec0c5aa70af8a7d4922df1931",
+      "id" : "com.google.j2objc:j2objc-annotations:1.3",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.guava:guava:31.1-jre", "com.mux:stats.muxcore:7.0.10", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "737db1ec137cbef220c17aada1de36fba5ff1bca",
+      "sha256" : "07099d0b61d4b9fa36dcce5b236b978ff7b049b3d511e5d01dd8869acc5f8963",
+      "md5" : "cdd3103d70037ed57d301d28766342f0",
+      "id" : "org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.5.10",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "org.jetbrains.kotlin:kotlin-parcelize-runtime:1.5.10", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    }, {
+      "type" : "jar",
+      "sha1" : "6975da39a7040257bd51d21a231b76c915872d38",
+      "sha256" : "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff",
+      "md5" : "289075e48b909e9e74e6c915b3631d2e",
+      "id" : "javax.inject:javax.inject:1",
+      "scopes" : [ "r3_11_1ReleaseRuntimeClasspath" ],
+      "requestedBy" : [ [ "com.google.dagger:dagger:2.39.1", "com.bitmovin.player:player:3.11.1", "Mux Stats SDK Bitmovinplayer:muxstatssdkbitmovinplayer:unspecified" ] ]
+    } ]
+  } ]
+}

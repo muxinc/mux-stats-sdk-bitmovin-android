@@ -1,0 +1,8 @@
+{
+  "type" : "gradle",
+  "id" : ":Mux Stats SDK Bitmovinplayer:unspecified",
+  "repository" : "",
+  "artifacts" : [ ],
+  "excludedArtifacts" : [ ],
+  "dependencies" : [ ]
+}

@@ -1,6 +1,8 @@
 # This script is called by the buildkite pipeline
 #
 # Accessing the secret containing env vars in here prevents buildkite from capturing them
+echo $ORG_GRADLE_PROJECT_artifactory_user
+echo $ORG_GRADLE_PROJECT_artifactory_password
 
 set -e
 

@@ -21,6 +21,8 @@ if (propertiesFile.exists()) {
     }
 }
 
+println("\n\n\n\nCREDSCREDS ARTIF USER NAME $artifactoryUsername")
+
 apply from: 'MuxAndroidSDKPublishing/git_utils.gradle', to: ext
 
 def gitHash = getGitHash()
