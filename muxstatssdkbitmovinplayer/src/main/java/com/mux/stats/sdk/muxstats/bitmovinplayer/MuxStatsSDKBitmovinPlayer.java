@@ -524,7 +524,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     @Override
     public boolean isPaused() {
-        return state == PlayerState.PAUSED;
+        return player.get().getPlayer().isPaused();
     }
 
     @Override
