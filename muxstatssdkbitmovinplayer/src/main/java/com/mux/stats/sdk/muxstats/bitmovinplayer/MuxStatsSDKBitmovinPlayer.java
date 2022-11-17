@@ -140,9 +140,7 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
 
     public void addBitmovinPlayerEventListener(IBitmovinPlayerEventsListener listener) {
         if (!registeredPlayerListeners.contains(listener)) {
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                registeredPlayerListeners.add(listener);
-            }
+            registeredPlayerListeners.add(listener);
         }
     }
 
@@ -170,90 +168,72 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             sourceHeight = videoChangeEvent.getHeight();
             RenditionChangeEvent event = new RenditionChangeEvent(null);
             dispatch(event);
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onVideoSizeChangedListener(videoChangeEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onVideoSizeChangedListener(videoChangeEvent);
             }
         };
 
     private final EventListener<PlayerEvent.TimeChanged> onTimeChangeListener =
         timeChangeEvent -> {
             playbackPosition = timeChangeEvent.getTime();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onTimeChangeListener(timeChangeEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onTimeChangeListener(timeChangeEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Play> onPlayListener =
         playEvent -> {
             play();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onPlayListener(playEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onPlayListener(playEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Playing> onPlayingListener =
         playingEvent -> {
             playing();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onPlayingListener(playingEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onPlayingListener(playingEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Paused> onPausedListener =
         pausedEvent -> {
             pause();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onPausedListener(pausedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onPausedListener(pausedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.PlaybackFinished> onPlaybackFinishedListener =
         playbackFinishedEvent -> {
             ended();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onPlaybackFinishedListener(playbackFinishedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onPlaybackFinishedListener(playbackFinishedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Seek> onSeekListener =
         seekingEvent -> {
             seeking();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onSeekListener(seekingEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onSeekListener(seekingEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Seeked> onSeekedListener =
         seekedEvent -> {
             seeked();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onSeekedListener(seekedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onSeekedListener(seekedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.Metadata> onMetadataListener =
         metadataEvent -> {
             // Do nothing
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onMetadataListener(metadataEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onMetadataListener(metadataEvent);
             }
         };
 
@@ -261,20 +241,16 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         stallStartedEvent -> {
             // Buffering started
             buffering();
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onStallStartedListener(stallStartedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onStallStartedListener(stallStartedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.StallEnded> onStallEndedListener =
         stallEndedEvent -> {
             // Buffering ended
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onStallEndedListener(stallEndedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onStallEndedListener(stallEndedEvent);
             }
         };
 
@@ -291,10 +267,8 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             viewData.setViewPrerollCreativeId(adCreativeId);
             adBreakEvent.setViewData(viewData);
             dispatch(adBreakEvent);
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onAdBreakStartedListener(adBreakStartedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onAdBreakStartedListener(adBreakStartedEvent);
             }
         };
 
@@ -303,10 +277,8 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             inAdPlayback = true;
             dispatch(new AdPlayEvent(null));
             dispatch(new AdPlayingEvent(null));
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onAdStartedListener(adStartedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onAdStartedListener(adStartedEvent);
             }
         };
 
@@ -314,10 +286,8 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
         adFinishedEvent -> {
             inAdPlayback = false;
             dispatch(new AdEndedEvent(null));
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onAdFinishedListener(adFinishedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onAdFinishedListener(adFinishedEvent);
             }
         };
 
@@ -330,20 +300,16 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             if (getCurrentPosition() == 0) {
                 dispatch(new PlayEvent(null));
             }
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onAdBreakFinishedListener(adBreakFinishedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onAdBreakFinishedListener(adBreakFinishedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.AdError> onAdErrorListener =
         adErrorEvent -> {
             dispatch(new AdErrorEvent(null));
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onAdErrorListener(adErrorEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onAdErrorListener(adErrorEvent);
             }
         };
 
@@ -353,22 +319,20 @@ public class MuxStatsSDKBitmovinPlayer extends EventBus implements IPlayerListen
             CustomerVideoData videoData = muxStats.getCustomerVideoData();
             videoData.setVideoSourceUrl(sourceLoadedEvent.getSource().getConfig().getUrl());
             muxStats.updateCustomerData(null, videoData);
-            synchronized (MuxStatsSDKBitmovinPlayer.this) {
-                for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
-                    listener.onSourceLoadedListener(sourceLoadedEvent);
-                }
+            for (IBitmovinPlayerEventsListener listener : registeredPlayerListeners) {
+                listener.onSourceLoadedListener(sourceLoadedEvent);
             }
         };
 
     private final EventListener<PlayerEvent.FullscreenEnabled> onFullscreenEnabledListener =
-      fullscreenEnabledEvent -> {
-        muxStats.presentationChange(MuxSDKViewPresentation.FULLSCREEN);
-      };
+        fullscreenEnabledEvent -> {
+            muxStats.presentationChange(MuxSDKViewPresentation.FULLSCREEN);
+        };
 
     private final EventListener<PlayerEvent.FullscreenDisabled> onFullscreenDisabledListener =
-      fullscreenDisabledEvent -> {
-        muxStats.presentationChange(MuxSDKViewPresentation.NORMAL);
-      };
+        fullscreenDisabledEvent -> {
+            muxStats.presentationChange(MuxSDKViewPresentation.NORMAL);
+        };
 
     protected void buffering() {
         if (state == PlayerState.REBUFFERING || seekingInProgress
