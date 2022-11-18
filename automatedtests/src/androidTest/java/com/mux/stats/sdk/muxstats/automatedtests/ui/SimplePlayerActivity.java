@@ -253,7 +253,7 @@ public class SimplePlayerActivity extends AppCompatActivity  implements
     }
     CustomerVideoData customerVideoData = new CustomerVideoData();
     customerVideoData.setVideoTitle(videoTitle);
-    mockNetwork = new MockNetworkRequest();
+    mockNetwork = new MockNetworkRequest(this);
     CustomerData customerData = new CustomerData(customerPlayerData, customerVideoData, null);
     muxStats = new MuxStatsSDKBitmovinPlayer(
         this,

@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureMuxSdk() {
         CustomerPlayerData customerPlayerData = new CustomerPlayerData();
-        customerPlayerData.setEnvironmentKey("YOUR_KEY_HERE");
+        customerPlayerData.setEnvironmentKey("YOUR ENV KEY HERE");
         CustomerVideoData customerVideoData = new CustomerVideoData();
         customerVideoData.setVideoTitle("Sintel");
         CustomerData customerData = new CustomerData(

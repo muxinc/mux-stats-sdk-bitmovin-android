@@ -1,14 +1,19 @@
 package com.mux.stats.sdk.muxstats.automatedtests.mockup;
 
+import android.content.Context;
+
 import com.mux.stats.sdk.muxstats.INetworkRequest;
+import com.mux.stats.sdk.muxstats.MuxDataSdk;
+import com.mux.stats.sdk.muxstats.MuxNetwork;
 import com.mux.stats.sdk.muxstats.automatedtests.BuildConfig;
-import com.mux.stats.sdk.muxstats.bitmovinplayer.MuxNetworkRequests;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Hashtable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class MockNetworkRequest implements INetworkRequest {
 
@@ -16,7 +21,7 @@ public class MockNetworkRequest implements INetworkRequest {
 
   IMuxNetworkRequestsCompletion callback;
   ArrayList<JSONObject> receivedEvents = new ArrayList<>();
-  MuxNetworkRequests muxNetwork;
+  INetworkRequest muxNetwork;
   IMuxNetworkRequestsCompletion muxNetworkCallback = new IMuxNetworkRequestsCompletion() {
 
     @Override
@@ -25,9 +30,16 @@ public class MockNetworkRequest implements INetworkRequest {
     }
   };
 
+  public MockNetworkRequest(Context ctx) {
+    muxNetwork = new MuxNetwork(
+        new MuxDataSdk.AndroidDevice(
+            ctx,
+            com.mux.stats.sdk.muxstats.bitmovinplayer.BuildConfig.FLAVOR.substring(1).replace('_', '.'),
+            com.mux.stats.sdk.muxstats.bitmovinplayer.BuildConfig.MUX_PLUGIN_NAME,
+            com.mux.stats.sdk.muxstats.bitmovinplayer.BuildConfig.LIB_VERSION,
+            "Bitmovin Player"
 
-  public MockNetworkRequest() {
-    muxNetwork = new MuxNetworkRequests();
+        ));
   }
 
   public void sendResponse(boolean shouldSucceed) {
@@ -47,8 +59,8 @@ public class MockNetworkRequest implements INetworkRequest {
 
   @Override
   public void postWithCompletion(String domain, String envKey, String body,
-      Hashtable<String, String> headers,
-      IMuxNetworkRequestsCompletion callback) {
+                                 Hashtable<String, String> headers,
+                                 IMuxNetworkRequestsCompletion callback) {
     try {
       JSONObject bodyJo = new JSONObject(body);
       JSONArray events = bodyJo.getJSONArray("events");
