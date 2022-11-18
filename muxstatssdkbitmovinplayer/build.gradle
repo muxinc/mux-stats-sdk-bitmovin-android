@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'checkstyle'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
+apply plugin: 'com.mux.gradle.android.mux-android-distribution'
 
 android {
     compileSdkVersion 33
@@ -40,6 +41,23 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+muxDistribution {
+  devVersion versionFromCommitHash('dev-')
+  releaseVersion versionFromTag()
+  artifactIds artifactFromFlavorValue('api')
+  groupIds just("com.mux.stats.sdk.muxstats")
+  publicReleaseIf releaseOnTag()
+
+  // TODO: This is kinda clumsy, packageJavadocs should be a function not a property probably
+  packageJavadocs = releaseOnTag().call()
+  publishIf { it.containsIgnoreCase("release") }
+  artifactoryConfig {
+    contextUrl = "https://muxinc.jfrog.io/artifactory/"
+    releaseRepoKey = 'default-maven-release-local'
+    devRepoKey = 'default-maven-local'
+  }
 }
 
 dependencies {
