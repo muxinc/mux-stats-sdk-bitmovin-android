@@ -61,7 +61,7 @@ muxDistribution {
 }
 
 dependencies {
-    api 'com.mux.stats.sdk.muxstats:android:dev-fix-ctors-a361d46'
+    api 'com.mux.stats.sdk.muxstats:android:0.4.1'
     // This is the version used by Bitmovin. For some reason this must be declared explicitly for buildkite to work
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.bitmovin.player:player:3.11.1'
