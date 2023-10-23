@@ -91,4 +91,4 @@ The code in this repo conforms to the [Google Java Style Guide](https://google.g
 The code was formatted in Android Studio/IntelliJ using the [Google Java Style for IntelliJ](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml). The style can be installed via the Java-style section of the IDE preferences (`Editor -> Code Style - >Java`).
 
 ## Documentation
-See [our docs](https://docs.mux.com/docs/theoplayer-integration-guide) for more information.
+See [our docs](https://docs.mux.com/guides/data/monitor-bitmovin-android) for more information.
