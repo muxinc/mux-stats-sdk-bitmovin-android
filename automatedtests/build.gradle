@@ -30,11 +30,6 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-        disable 'GradleCompatible'
-        lintConfig file("../checker-framework-lint.xml")
-    }
 
     testOptions {
         // Changes the directory where Gradle saves test reports. By default, Gradle saves test reports
@@ -67,6 +62,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    namespace 'com.mux.stats.sdk.muxstats.automatedtests'
+    lint {
+        abortOnError false
+        disable 'GradleCompatible'
+        lintConfig file('../checker-framework-lint.xml')
     }
 }
 

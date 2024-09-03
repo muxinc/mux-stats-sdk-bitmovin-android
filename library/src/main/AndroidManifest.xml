@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mux.stats.sdk.muxstats.bitmovinplayer" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -5,11 +5,10 @@ apply plugin: 'signing'
 apply plugin: 'com.mux.gradle.android.mux-android-distribution'
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 33
         multiDexEnabled true
 
         buildConfigField("String", "MUX_PLUGIN_VERSION", "\"${versionName}\"")
@@ -17,6 +16,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
     buildTypes {
@@ -41,6 +44,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.mux.stats.sdk.muxstats.bitmovinplayer'
 }
 
 muxDistribution {
