@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdk project.ext.compileSdkVersion
 
     defaultConfig {
         multiDexEnabled true
         applicationId "com.mux.stats.sdk.muxstats.bitmovinplayer.demo"
-        minSdkVersion project.ext.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"

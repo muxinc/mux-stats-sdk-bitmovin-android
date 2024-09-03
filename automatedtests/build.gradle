@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdk project.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.mux.stats.sdk.muxstats.automatedtests"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
