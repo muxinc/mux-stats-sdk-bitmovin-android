@@ -48,10 +48,16 @@ muxDistribution {
   releaseVersion versionFromTag()
   artifactIds artifactFromFlavorValue('api')
   groupIds just("com.mux.stats.sdk.muxstats")
-  publicReleaseIf releaseOnTag()
+  publicReleaseIf releaseIfCmdFlag("publicRelease")
+
+  dokkaConfig {
+    moduleName = "Mux Data SDK for Bitmovin Player"
+    footer = "(c) " + new Date().format("yyyy") + " Mux, Inc. Have questions or need help?" +
+        " Contact support@mux.com"
+  }
 
   // TODO: This is kinda clumsy, packageJavadocs should be a function not a property probably
-  packageJavadocs = releaseOnTag().call()
+  packageJavadocs =  releaseIfCmdFlag("publicRelease").call()
   publishIf { it.containsIgnoreCase("release") }
   artifactoryConfig {
     contextUrl = "https://muxinc.jfrog.io/artifactory/"
