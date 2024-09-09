@@ -13,5 +13,5 @@
 .externalNativeBuild
 .cxx
 .idea
-app/buildout
-muxstatssdkbitmovinplayer/buildout
+app/build
+library/build
