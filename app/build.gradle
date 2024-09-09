@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdk project.ext.compileSdkVersion
 
     defaultConfig {
         multiDexEnabled true
         applicationId "com.mux.stats.sdk.muxstats.bitmovinplayer.demo"
-        minSdkVersion project.ext.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -49,10 +49,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.mux.stats.sdk.muxstats.bitmovinplayer.demo'
 }
 
 dependencies {
-    implementation project(':muxstatssdkbitmovinplayer')
+    implementation project(':library')
     implementation 'com.bitmovin.player:player:3.11.1'
     // This is the version used by Bitmovin. For some reason this must be declared explicitly for buildkite to work
     implementation 'androidx.appcompat:appcompat:1.2.0'

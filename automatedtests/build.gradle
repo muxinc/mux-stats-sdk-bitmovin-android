@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdk project.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.mux.stats.sdk.muxstats.automatedtests"
-        minSdkVersion 18
+        minSdkVersion 21
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,10 @@ android {
         buildConfigField("String", "INSTRUMENTATION_TEST_ENVIRONMENT_KEY", "\"YOUR KEY HERE\"")
         var bitmovinLicense = System.getenv("BITMOVIN_LICENSE") == null ? "NOT_CONFIGURED" : System.getenv("BITMOVIN_LICENSE")
         manifestPlaceholders.bitmovinLicense = bitmovinLicense
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
     buildTypes {
@@ -30,11 +34,6 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-        disable 'GradleCompatible'
-        lintConfig file("../checker-framework-lint.xml")
-    }
 
     testOptions {
         // Changes the directory where Gradle saves test reports. By default, Gradle saves test reports
@@ -68,6 +67,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    namespace 'com.mux.stats.sdk.muxstats.automatedtests'
+    lint {
+        abortOnError false
+        disable 'GradleCompatible'
+        lintConfig file('../checker-framework-lint.xml')
+    }
 }
 
 dependencies {
@@ -90,7 +95,7 @@ dependencies {
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     api 'org.checkerframework:checker-qual:3.12.0'
-    implementation project(':muxstatssdkbitmovinplayer')
+    implementation project(':library')
 }
 
 afterEvaluate {
