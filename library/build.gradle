@@ -57,7 +57,7 @@ muxDistribution {
   dokkaConfig {
     moduleName = "Mux Data SDK for Bitmovin Player"
     footer = "(c) " + new Date().format("yyyy") + " Mux, Inc. Have questions or need help?" +
-        " Contact support@mux.com"
+        " Visit https://www.mux.com/support"
   }
 
   // TODO: This is kinda clumsy, packageJavadocs should be a function not a property probably
